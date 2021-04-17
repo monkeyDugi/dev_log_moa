@@ -1,4 +1,4 @@
-package com.devlogmoa.devlogmoa;
+package com.devlogmoa;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
