@@ -18,5 +18,6 @@ public class SchedulerJob implements Job {
     public void execute(JobExecutionContext context) throws JobExecutionException {
         RssReader bean = (RssReader) CustomBeanUtil.getBean("rssReader");
         bean.createTestData("https://dev-monkey-dugi.tistory.com/");
+        bean.createTestData("https://monkey-dugi.tistory.com/");
     }
 }
