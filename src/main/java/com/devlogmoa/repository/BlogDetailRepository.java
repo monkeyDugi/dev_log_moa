@@ -18,4 +18,18 @@ public class BlogDetailRepository {
             em.persist(blogDetail);
         }
     }
+
+    public BlogDetail findByBlogIdMaxPurDate(Long blogId) {
+        String sql = "select b " +
+                       "From BlogDetail b " +
+                      "where b.blog.id=:blogId " +
+                      "order by b.pubDate desc";
+
+        return (BlogDetail) em.createQuery(sql)
+                .setParameter("blogId", blogId)
+                .setFirstResult(0)
+                .setMaxResults(1)
+                .getSingleResult();
+    }
+
 }

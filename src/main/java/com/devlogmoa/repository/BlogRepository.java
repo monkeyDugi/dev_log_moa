@@ -17,7 +17,9 @@ public class BlogRepository {
     }
 
     public Blog findByLink(String link) {
-        String sql = "select b From Blog b where b.link=:link";
+        String sql = "select b " +
+                       "From Blog b " +
+                      "where b.link=:link";
 
         return (Blog) em.createQuery(sql)
                 .setParameter("link", link)

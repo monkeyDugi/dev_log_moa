@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,12 +34,22 @@ public class RssReader {
         List<SyndEntry> entries = feed.getEntries();
 
         String mainLink = feed.getLink();
-        System.out.println("mainLink = " + mainLink);
 
+        // Blog 체크
+        Blog findByBlog = blogRepository.findByLink(mainLink);
         Blog blog = new Blog();
-        blog.setLink(mainLink);
-        blog.setRssLink(rssLink);
-        blogRepository.save(blog);
+
+        if (findByBlog == null) {
+            blog.setLink(mainLink);
+            blog.setRssLink(rssLink);
+
+            blogRepository.save(blog);
+        } else {
+            blog = findByBlog;
+        }
+
+        // BlogDetail 체크
+        BlogDetail findBlogDetail = blogDetailRepository.findByBlogIdMaxPurDate(blog.getId());
 
         List<BlogDetail> blogDetails = new ArrayList<>();
         for (SyndEntry entry : entries) {
@@ -49,18 +58,23 @@ public class RssReader {
             Date pubDate = entry.getPublishedDate();
             String description = entry.getDescription().getValue();
 
-            System.out.println("title = " + title);
+            if (findBlogDetail.getPubDate().compareTo(pubDate) < 0) {
+                if (findBlogDetail.getPostLink().equals(link)) {
+                    findBlogDetail.setPubDate(pubDate);
+                    findBlogDetail.setTitle(title);
+                    findBlogDetail.setContents(description);
+                } else {
+                    BlogDetail blogDetail = new BlogDetail();
+                    blogDetail.setPostLink(link);
+                    blogDetail.setPubDate(pubDate);
+                    blogDetail.setTitle(title);
+                    blogDetail.setContents(description);
+                    blogDetail.setBlog(blog);
 
-            BlogDetail blogDetail = new BlogDetail();
-            blogDetail.setPostLink(link);
-            blogDetail.setPubDate(pubDate);
-            blogDetail.setTitle(title);
-            blogDetail.setContents(description);
-            blogDetail.setBlog(blog);
-
-            blogDetails.add(blogDetail);
+                    blogDetails.add(blogDetail);
+                    blogDetailRepository.save(blogDetails);
+                }
+            }
         }
-
-        blogDetailRepository.save(blogDetails);
     }
 }
