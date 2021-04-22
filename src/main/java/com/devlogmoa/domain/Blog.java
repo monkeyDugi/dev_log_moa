@@ -19,4 +19,7 @@ public class Blog {
 
     @Column(nullable = false, unique = true)
     private String rssLink;
+
+    @Column(nullable = false)
+    private String mainTitle;
 }

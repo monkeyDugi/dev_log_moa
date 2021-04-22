@@ -17,7 +17,8 @@ public class SchedulerJob implements Job {
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
         RssReader bean = (RssReader) CustomBeanUtil.getBean("rssReader");
-        bean.createTestData("https://dev-monkey-dugi.tistory.com/");
-        bean.createTestData("https://monkey-dugi.tistory.com/");
+        bean.searchRssData("https://dev-monkey-dugi.tistory.com/");
+        bean.searchRssData("https://monkey-dugi.tistory.com/");
+        bean.searchRssData("https://jojoldu.tistory.com/");
     }
 }

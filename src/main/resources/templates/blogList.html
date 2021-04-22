@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<body>
+<div class="container">
+  <div th:replace="fragments/bodyHeader :: bodyHeader" />
+  <div>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>id</th> <th>제목</th> <th>작성자</th> <th>작성일</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="blog : ${blogs}">
+        <td th:text="${blog.id}"></td>
+        <td th:text="${blog.pubDate}"></td>
+        <td th:text="${blog.title}"></td>
+        <td>
+          <a th:href="${blog.pubLink}">
+            보기
+          </a>
+        </td>
+        <td th:text="${blog.blog.mainTitle}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+</body>
+</html>

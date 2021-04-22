@@ -2,9 +2,11 @@ package com.devlogmoa.repository;
 
 import com.devlogmoa.domain.Blog;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 
 @RequiredArgsConstructor
 @Repository
@@ -21,8 +23,13 @@ public class BlogRepository {
                        "From Blog b " +
                       "where b.link=:link";
 
-        return (Blog) em.createQuery(sql)
-                .setParameter("link", link)
-                .getSingleResult();
+        try {
+            return em.createQuery(sql, Blog.class)
+                    .setParameter("link", link)
+                    .getSingleResult();
+        } catch (EmptyResultDataAccessException | NoResultException e) {
+            return null;
+        }
     }
+
 }

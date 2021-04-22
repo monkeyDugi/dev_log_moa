@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -27,54 +26,61 @@ public class RssReader {
     private final BlogDetailRepository blogDetailRepository;
 
     @Transactional
-    public void createTestData(String url) throws IOException, FeedException {
+    public void searchRssData(String url) throws IOException, FeedException {
         String rssLink = url + "rss";
 
         SyndFeed feed = new SyndFeedInput().build(new XmlReader(new URL(rssLink)));
         List<SyndEntry> entries = feed.getEntries();
 
         String mainLink = feed.getLink();
+        String mainTitle = feed.getTitle();
 
-        // Blog 체크
-        Blog findByBlog = blogRepository.findByLink(mainLink);
-        Blog blog = new Blog();
+        Blog blog = mergeBlog(rssLink, mainLink, mainTitle);
+        mergeBlogDetail(blog, entries);
+    }
 
-        if (findByBlog == null) {
-            blog.setLink(mainLink);
-            blog.setRssLink(rssLink);
-
-            blogRepository.save(blog);
-        } else {
-            blog = findByBlog;
-        }
-
-        // BlogDetail 체크
-        BlogDetail findBlogDetail = blogDetailRepository.findByBlogIdMaxPurDate(blog.getId());
-
+    private void mergeBlogDetail(Blog blog, List<SyndEntry> entries) {
+        BlogDetail findOneBlogDetail = blogDetailRepository.findByBlogIdMaxPurDate(blog.getId());
         List<BlogDetail> blogDetails = new ArrayList<>();
-        for (SyndEntry entry : entries) {
-            String title = entry.getTitle();
-            String link = entry.getLink();
-            Date pubDate = entry.getPublishedDate();
-            String description = entry.getDescription().getValue();
 
-            if (findBlogDetail.getPubDate().compareTo(pubDate) < 0) {
-                if (findBlogDetail.getPostLink().equals(link)) {
-                    findBlogDetail.setPubDate(pubDate);
-                    findBlogDetail.setTitle(title);
-                    findBlogDetail.setContents(description);
+        for (SyndEntry entry : entries) {
+
+            if (findOneBlogDetail == null) {
+                if (entry != null) {
+                    BlogDetail blogDetail = new BlogDetail();
+                    blogDetail.createPublish(entry.getLink(), entry.getPublishedDate(), entry.getTitle(), entry.getDescription().getValue(), blog);
+
+                    blogDetails.add(blogDetail);
+                    blogDetailRepository.save(blogDetails);
+                }
+            } else if (findOneBlogDetail.isNewPublish(entry.getPublishedDate())) {
+                if (findOneBlogDetail.getPubLink().equals(entry.getLink())) {
+                    findOneBlogDetail.updatePublish(entry.getPublishedDate(), entry.getTitle(), entry.getDescription().getValue());
                 } else {
                     BlogDetail blogDetail = new BlogDetail();
-                    blogDetail.setPostLink(link);
-                    blogDetail.setPubDate(pubDate);
-                    blogDetail.setTitle(title);
-                    blogDetail.setContents(description);
-                    blogDetail.setBlog(blog);
+                    blogDetail.createPublish(entry.getLink(), entry.getPublishedDate(), entry.getTitle(), entry.getDescription().getValue(), blog);
 
                     blogDetails.add(blogDetail);
                     blogDetailRepository.save(blogDetails);
                 }
             }
         }
+    }
+
+    private Blog mergeBlog(String rssLink, String mainLink, String mainTitle) {
+        Blog findByBlog = blogRepository.findByLink(mainLink);
+        Blog blog = new Blog();
+
+        if (findByBlog == null) {
+            blog.setLink(mainLink);
+            blog.setRssLink(rssLink);
+            blog.setMainTitle(mainTitle);
+
+            blogRepository.save(blog);
+
+            return blog;
+        }
+
+        return findByBlog;
     }
 }

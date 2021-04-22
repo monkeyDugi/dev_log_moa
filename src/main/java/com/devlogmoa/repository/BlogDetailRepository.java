@@ -2,9 +2,11 @@ package com.devlogmoa.repository;
 
 import com.devlogmoa.domain.BlogDetail;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -21,15 +23,28 @@ public class BlogDetailRepository {
 
     public BlogDetail findByBlogIdMaxPurDate(Long blogId) {
         String sql = "select b " +
-                       "From BlogDetail b " +
+                       "from BlogDetail b " +
                       "where b.blog.id=:blogId " +
                       "order by b.pubDate desc";
 
-        return (BlogDetail) em.createQuery(sql)
-                .setParameter("blogId", blogId)
+        try {
+            return em.createQuery(sql, BlogDetail.class)
+                    .setParameter("blogId", blogId)
+                    .setFirstResult(0)
+                    .setMaxResults(1)
+                    .getSingleResult();
+        } catch (EmptyResultDataAccessException | NoResultException e) {
+            return null;
+        }
+    }
+
+    public List<BlogDetail> findAll() {
+        String sql = "select b from BlogDetail b order by b.pubDate desc";
+
+        return em.createQuery(sql, BlogDetail.class)
                 .setFirstResult(0)
-                .setMaxResults(1)
-                .getSingleResult();
+                .setMaxResults(20)
+                .getResultList();
     }
 
 }
