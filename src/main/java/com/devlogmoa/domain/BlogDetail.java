@@ -1,12 +1,13 @@
 package com.devlogmoa.domain;
 
+import com.devlogmoa.web.dto.BlogDetailDto;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Getter @Setter
+@Getter
 @Entity
 public class BlogDetail {
 
@@ -27,20 +28,28 @@ public class BlogDetail {
     private String contents;
 
     public boolean isNewPublish(Date publishedDate) {
+        if (pubDate == null) {
+            return false;
+        }
+
         return pubDate.compareTo(publishedDate) < 0;
     }
 
-    public void updatePublish(Date pubDate, String title, String description) {
-        this.pubDate = pubDate;
-        this.title = title;
-        this.contents = description;
+    public void updatePublish(BlogDetailDto blogDetailDto) {
+        this.pubDate = blogDetailDto.getPubDate();
+        this.title = blogDetailDto.getTitle();
+        this.contents = blogDetailDto.getContents();
     }
 
-    public void createPublish(String link, Date pubDate, String title, String description, Blog blog) {
-        this.pubLink = link;
-        this.pubDate = pubDate;
-        this.title = title;
-        this.contents = description;
-        this.blog = blog;
+    public static BlogDetail createPublish(BlogDetailDto blogDetailDto) {
+        BlogDetail blogDetail = new BlogDetail();
+
+        blogDetail.pubLink = blogDetailDto.getPubLink();
+        blogDetail.pubDate = blogDetailDto.getPubDate();
+        blogDetail.title = blogDetailDto.getTitle();
+        blogDetail.contents = blogDetailDto.getContents();
+        blogDetail.blog = blogDetailDto.getBlog();
+
+        return blogDetail;
     }
 }

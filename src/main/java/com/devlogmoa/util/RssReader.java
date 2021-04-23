@@ -4,6 +4,7 @@ import com.devlogmoa.domain.Blog;
 import com.devlogmoa.domain.BlogDetail;
 import com.devlogmoa.repository.BlogDetailRepository;
 import com.devlogmoa.repository.BlogRepository;
+import com.devlogmoa.web.dto.BlogDetailDto;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.FeedException;
@@ -26,55 +27,24 @@ public class RssReader {
     private final BlogDetailRepository blogDetailRepository;
 
     @Transactional
-    public void searchRssData(String url) throws IOException, FeedException {
-        String rssLink = url + "rss";
+    public void createRssData(String url) throws IOException, FeedException {
+        String blogRssLink = url + "rss";
 
-        SyndFeed feed = new SyndFeedInput().build(new XmlReader(new URL(rssLink)));
+        SyndFeed feed = new SyndFeedInput().build(new XmlReader(new URL(blogRssLink)));
         List<SyndEntry> entries = feed.getEntries();
 
-        String mainLink = feed.getLink();
-        String mainTitle = feed.getTitle();
+        String blogLink = feed.getLink();
+        String blogTitle = feed.getTitle();
 
-        Blog blog = mergeBlog(rssLink, mainLink, mainTitle);
-        mergeBlogDetail(blog, entries);
+        Blog blog = createBlog(blogLink, blogRssLink, blogTitle);
+        createBlogDetail(blog, entries);
     }
 
-    private void mergeBlogDetail(Blog blog, List<SyndEntry> entries) {
-        BlogDetail findOneBlogDetail = blogDetailRepository.findByBlogIdMaxPurDate(blog.getId());
-        List<BlogDetail> blogDetails = new ArrayList<>();
-
-        for (SyndEntry entry : entries) {
-
-            if (findOneBlogDetail == null) {
-                if (entry != null) {
-                    BlogDetail blogDetail = new BlogDetail();
-                    blogDetail.createPublish(entry.getLink(), entry.getPublishedDate(), entry.getTitle(), entry.getDescription().getValue(), blog);
-
-                    blogDetails.add(blogDetail);
-                    blogDetailRepository.save(blogDetails);
-                }
-            } else if (findOneBlogDetail.isNewPublish(entry.getPublishedDate())) {
-                if (findOneBlogDetail.getPubLink().equals(entry.getLink())) {
-                    findOneBlogDetail.updatePublish(entry.getPublishedDate(), entry.getTitle(), entry.getDescription().getValue());
-                } else {
-                    BlogDetail blogDetail = new BlogDetail();
-                    blogDetail.createPublish(entry.getLink(), entry.getPublishedDate(), entry.getTitle(), entry.getDescription().getValue(), blog);
-
-                    blogDetails.add(blogDetail);
-                    blogDetailRepository.save(blogDetails);
-                }
-            }
-        }
-    }
-
-    private Blog mergeBlog(String rssLink, String mainLink, String mainTitle) {
-        Blog findByBlog = blogRepository.findByLink(mainLink);
-        Blog blog = new Blog();
+    private Blog createBlog(String blogLink, String blogRssLink, String blogTitle) {
+        Blog findByBlog = blogRepository.findByLink(blogLink);
 
         if (findByBlog == null) {
-            blog.setLink(mainLink);
-            blog.setRssLink(rssLink);
-            blog.setMainTitle(mainTitle);
+            Blog blog = Blog.createBlog(blogLink, blogRssLink, blogTitle);
 
             blogRepository.save(blog);
 
@@ -82,5 +52,31 @@ public class RssReader {
         }
 
         return findByBlog;
+    }
+
+    private void createBlogDetail(Blog blog, List<SyndEntry> entries) {
+        for (SyndEntry entry : entries) {
+            mergeBlogDetail(blog, entry);
+        }
+    }
+
+    private void mergeBlogDetail(Blog blog, SyndEntry entry) {
+        BlogDetail findLastBlogDetail = blogDetailRepository.findByBlogIdMaxPurDate(blog.getId());
+        List<BlogDetail> blogDetails = new ArrayList<>();
+
+        if (findLastBlogDetail.isNewPublish(entry.getPublishedDate())) {
+            updatePublish(findLastBlogDetail, entry);
+        } else {
+            BlogDetail blogDetail = BlogDetail.createPublish(new BlogDetailDto(entry, blog));
+
+            blogDetails.add(blogDetail);
+            blogDetailRepository.save(blogDetails);
+        }
+    }
+
+    private void updatePublish(BlogDetail findLastBlogDetail, SyndEntry entry) {
+        if (findLastBlogDetail.getPubLink().equals(entry.getLink())) {
+            findLastBlogDetail.updatePublish(new BlogDetailDto(entry));
+        }
     }
 }

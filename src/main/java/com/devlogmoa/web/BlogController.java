@@ -1,4 +1,4 @@
-package com.devlogmoa;
+package com.devlogmoa.web;
 
 import com.devlogmoa.domain.BlogDetail;
 import com.devlogmoa.repository.BlogDetailRepository;
@@ -11,15 +11,15 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
-public class HelloController {
+public class BlogController {
 
     private final BlogDetailRepository blogDetailRepository;
 
-    @GetMapping("hello")
-    public String hello(Model model) {
+    @GetMapping("/")
+    public String blogs(Model model) {
         List<BlogDetail> blogDetails = blogDetailRepository.findAll();
 
-        model.addAttribute("blogs", blogDetails);
+        model.addAttribute("blogDetails", blogDetails);
 
         return "blogList";
     }

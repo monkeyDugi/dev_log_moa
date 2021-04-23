@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Getter @Setter
+@Getter
 @Entity
 public class Blog {
 
@@ -15,11 +15,21 @@ public class Blog {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String link;
+    private String blogLink;
 
     @Column(nullable = false, unique = true)
-    private String rssLink;
+    private String blogRssLink;
 
     @Column(nullable = false)
-    private String mainTitle;
+    private String blogTitle;
+
+    public static Blog createBlog(String blogLink, String blogRssLink, String blogTitle) {
+        Blog blog = new Blog();
+
+        blog.blogLink = blogLink;
+        blog.blogRssLink = blogRssLink;
+        blog.blogTitle = blogTitle;
+
+        return blog;
+    }
 }

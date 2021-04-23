@@ -12,16 +12,16 @@
       </tr>
       </thead>
       <tbody>
-      <tr th:each="blog : ${blogs}">
-        <td th:text="${blog.id}"></td>
-        <td th:text="${blog.pubDate}"></td>
-        <td th:text="${blog.title}"></td>
+      <tr th:each="blogDetail : ${blogDetails}">
+        <td th:text="${blogDetail.id}"></td>
+        <td th:text="${blogDetail.pubDate}"></td>
+        <td th:text="${blogDetail.title}"></td>
         <td>
-          <a th:href="${blog.pubLink}">
+          <a th:href="${blogDetail.pubLink}">
             보기
           </a>
         </td>
-        <td th:text="${blog.blog.mainTitle}"></td>
+        <td th:text="${blogDetail.blog.blogTitle}"></td>
       </tr>
       </tbody>
     </table>

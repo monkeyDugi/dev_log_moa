@@ -34,7 +34,7 @@ public class BlogDetailRepository {
                     .setMaxResults(1)
                     .getSingleResult();
         } catch (EmptyResultDataAccessException | NoResultException e) {
-            return null;
+            return new BlogDetail();
         }
     }
 

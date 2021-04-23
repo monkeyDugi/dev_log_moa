@@ -18,14 +18,14 @@ public class BlogRepository {
         em.persist(blog);
     }
 
-    public Blog findByLink(String link) {
+    public Blog findByLink(String blogLink) {
         String sql = "select b " +
                        "From Blog b " +
-                      "where b.link=:link";
+                      "where b.blogLink=:blogLink";
 
         try {
             return em.createQuery(sql, Blog.class)
-                    .setParameter("link", link)
+                    .setParameter("blogLink", blogLink)
                     .getSingleResult();
         } catch (EmptyResultDataAccessException | NoResultException e) {
             return null;
