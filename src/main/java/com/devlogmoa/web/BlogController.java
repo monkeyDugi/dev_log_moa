@@ -2,12 +2,14 @@ package com.devlogmoa.web;
 
 import com.devlogmoa.domain.BlogDetail;
 import com.devlogmoa.repository.BlogDetailRepository;
+import com.devlogmoa.web.dto.response.BlogDetailDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Controller
@@ -17,7 +19,10 @@ public class BlogController {
 
     @GetMapping("/")
     public String blogs(Model model) {
-        List<BlogDetail> blogDetails = blogDetailRepository.findAll();
+        List<BlogDetailDto> blogDetails = blogDetailRepository.findAll()
+                .stream()
+                .map(BlogDetailDto::new)
+                .collect(Collectors.toList());
 
         model.addAttribute("blogDetails", blogDetails);
 

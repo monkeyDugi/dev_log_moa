@@ -1,8 +1,7 @@
 package com.devlogmoa.domain;
 
-import com.devlogmoa.web.dto.BlogDetailDto;
+import com.devlogmoa.web.dto.RssDto;
 import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -35,20 +34,20 @@ public class BlogDetail {
         return pubDate.compareTo(publishedDate) < 0;
     }
 
-    public void updatePublish(BlogDetailDto blogDetailDto) {
-        this.pubDate = blogDetailDto.getPubDate();
-        this.title = blogDetailDto.getTitle();
-        this.contents = blogDetailDto.getContents();
+    public void updatePublish(RssDto rssDto) {
+        this.pubDate = rssDto.getPubDate();
+        this.title = rssDto.getTitle();
+        this.contents = rssDto.getContents();
     }
 
-    public static BlogDetail createPublish(BlogDetailDto blogDetailDto) {
+    public static BlogDetail createPublish(RssDto rssDto) {
         BlogDetail blogDetail = new BlogDetail();
 
-        blogDetail.pubLink = blogDetailDto.getPubLink();
-        blogDetail.pubDate = blogDetailDto.getPubDate();
-        blogDetail.title = blogDetailDto.getTitle();
-        blogDetail.contents = blogDetailDto.getContents();
-        blogDetail.blog = blogDetailDto.getBlog();
+        blogDetail.pubLink = rssDto.getPubLink();
+        blogDetail.pubDate = rssDto.getPubDate();
+        blogDetail.title = rssDto.getTitle();
+        blogDetail.contents = rssDto.getContents();
+        blogDetail.blog = rssDto.getBlog();
 
         return blogDetail;
     }

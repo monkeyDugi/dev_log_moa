@@ -4,7 +4,7 @@ import com.devlogmoa.domain.Blog;
 import com.devlogmoa.domain.BlogDetail;
 import com.devlogmoa.repository.BlogDetailRepository;
 import com.devlogmoa.repository.BlogRepository;
-import com.devlogmoa.web.dto.BlogDetailDto;
+import com.devlogmoa.web.dto.RssDto;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.FeedException;
@@ -67,7 +67,7 @@ public class RssReader {
         if (findLastBlogDetail.isNewPublish(entry.getPublishedDate())) {
             updatePublish(findLastBlogDetail, entry);
         } else {
-            BlogDetail blogDetail = BlogDetail.createPublish(new BlogDetailDto(entry, blog));
+            BlogDetail blogDetail = BlogDetail.createPublish(RssDto.newRss(entry, blog));
 
             blogDetails.add(blogDetail);
             blogDetailRepository.save(blogDetails);
@@ -76,7 +76,7 @@ public class RssReader {
 
     private void updatePublish(BlogDetail findLastBlogDetail, SyndEntry entry) {
         if (findLastBlogDetail.getPubLink().equals(entry.getLink())) {
-            findLastBlogDetail.updatePublish(new BlogDetailDto(entry));
+            findLastBlogDetail.updatePublish(RssDto.existNewRss(entry));
         }
     }
 }
