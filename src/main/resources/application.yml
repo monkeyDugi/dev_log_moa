@@ -7,7 +7,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         #        show_sql: true # System.out으로 찍기 때문에 쓰지 말자.

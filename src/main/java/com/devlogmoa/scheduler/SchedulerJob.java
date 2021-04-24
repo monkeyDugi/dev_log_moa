@@ -16,10 +16,10 @@ public class SchedulerJob implements Job {
     @SneakyThrows
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        RssReader bean = (RssReader) CustomBeanUtil.getBean("rssReader");
-
-        bean.createRssData("https://dev-monkey-dugi.tistory.com/");
-        bean.createRssData("https://monkey-dugi.tistory.com/");
-        bean.createRssData("https://jojoldu.tistory.com/");
+//        RssReader bean = (RssReader) CustomBeanUtil.getBean("rssReader");
+//
+//        bean.createRssData("https://dev-monkey-dugi.tistory.com/");
+//        bean.createRssData("https://monkey-dugi.tistory.com/");
+//        bean.createRssData("https://jojoldu.tistory.com/");
     }
 }

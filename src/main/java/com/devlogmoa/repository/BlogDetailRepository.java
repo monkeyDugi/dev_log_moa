@@ -39,12 +39,11 @@ public class BlogDetailRepository {
     }
 
     public List<BlogDetail> findAll() {
-        String sql = "select b from BlogDetail b order by b.pubDate desc";
+        String sql = "select b from BlogDetail b join fetch b.blog order by b.pubDate desc";
 
         return em.createQuery(sql, BlogDetail.class)
                 .setFirstResult(0)
                 .setMaxResults(20)
                 .getResultList();
     }
-
 }

@@ -1,32 +1,34 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header" />
+<head>
+  <!-- 부트스트랩 css 사용 -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+</head>
 <body>
-<div class="container">
-  <div th:replace="fragments/bodyHeader :: bodyHeader" />
-  <div>
-    <table class="table table-striped">
-      <thead>
-      <tr>
-        <th>id</th> <th>제목</th> <th>작성자</th> <th>작성일</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="blogDetail : ${blogDetails}">
-        <td th:text="${blogDetail.id}"></td>
-        <td th:text="${blogDetail.pubDate}"></td>
-        <td th:text="${blogDetail.title}"></td>
-        <td>
-          <a th:href="${blogDetail.pubLink}">
-            보기
-          </a>
-        </td>
-        <td th:text="${blogDetail.blog.blogTitle}"></td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-  <div th:replace="fragments/footer :: footer" />
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>id</th> <th>제목</th> <th>작성자</th> <th>작성일</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="blogDetail : ${blogDetails}">
+      <td th:text="${blogDetail.id}"></td>
+      <td th:text="${blogDetail.pubDate}"></td>
+      <td th:text="${blogDetail.title}"></td>
+      <td>
+        <a th:href="${blogDetail.pubLink}">
+          보기
+        </a>
+      </td>
+      <td th:text="${blogDetail.blog.blogTitle}"></td>
+    </tr>
+    </tbody>
+  </table>
 </div> <!-- /container -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!--  부트스트랩 js 사용 -->
+<script type="text/javascript" src="/js/bootstrap.js"></script>
 </body>
 </html>
