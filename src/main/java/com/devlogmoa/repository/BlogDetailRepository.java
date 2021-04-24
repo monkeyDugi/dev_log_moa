@@ -15,10 +15,8 @@ public class BlogDetailRepository {
 
     private final EntityManager em;
 
-    public void save(List<BlogDetail> blogDetails) {
-        for (BlogDetail blogDetail : blogDetails) {
-            em.persist(blogDetail);
-        }
+    public void save(BlogDetail blogDetail) {
+        em.persist(blogDetail);
     }
 
     public BlogDetail findByBlogIdMaxPurDate(Long blogId) {
@@ -34,7 +32,7 @@ public class BlogDetailRepository {
                     .setMaxResults(1)
                     .getSingleResult();
         } catch (EmptyResultDataAccessException | NoResultException e) {
-            return new BlogDetail();
+            return null;
         }
     }
 

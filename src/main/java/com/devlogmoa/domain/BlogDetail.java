@@ -26,12 +26,12 @@ public class BlogDetail {
     @Lob
     private String contents;
 
-    public boolean isNewPublish(Date publishedDate) {
+    public boolean isNewPublish(Date publishedDate, String pubLink) {
         if (pubDate == null) {
             return false;
         }
 
-        return pubDate.compareTo(publishedDate) < 0;
+        return pubDate.compareTo(publishedDate) < 0 && !this.pubLink.equals(pubLink);
     }
 
     public void updatePublish(RssDto rssDto) {

@@ -7,7 +7,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         #        show_sql: true # System.out으로 찍기 때문에 쓰지 말자.
@@ -16,4 +16,4 @@ spring:
 logging:
   level:
     org.hibernate.SQL: debug # 로거로 찍기 때문에 사용하자.
-    org.hibernate.type: trace
+#    org.hibernate.type: trace

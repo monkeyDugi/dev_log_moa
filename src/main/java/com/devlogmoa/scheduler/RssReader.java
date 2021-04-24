@@ -1,4 +1,4 @@
-package com.devlogmoa.util;
+package com.devlogmoa.scheduler;
 
 import com.devlogmoa.domain.Blog;
 import com.devlogmoa.domain.BlogDetail;
@@ -55,22 +55,21 @@ public class RssReader {
     }
 
     private void createBlogDetail(Blog blog, List<SyndEntry> entries) {
+        BlogDetail findLastBlogDetail = blogDetailRepository.findByBlogIdMaxPurDate(blog.getId());
+
         for (SyndEntry entry : entries) {
-            mergeBlogDetail(blog, entry);
+            mergeBlogDetail(blog, entry, findLastBlogDetail);
         }
     }
 
-    private void mergeBlogDetail(Blog blog, SyndEntry entry) {
-        BlogDetail findLastBlogDetail = blogDetailRepository.findByBlogIdMaxPurDate(blog.getId());
-        List<BlogDetail> blogDetails = new ArrayList<>();
+    private void mergeBlogDetail(Blog blog, SyndEntry entry, BlogDetail findLastBlogDetail) {
 
-        if (findLastBlogDetail.isNewPublish(entry.getPublishedDate())) {
-            updatePublish(findLastBlogDetail, entry);
-        } else {
+        if (findLastBlogDetail == null || findLastBlogDetail.isNewPublish(entry.getPublishedDate(), entry.getLink())) {
             BlogDetail blogDetail = BlogDetail.createPublish(RssDto.newRss(entry, blog));
 
-            blogDetails.add(blogDetail);
-            blogDetailRepository.save(blogDetails);
+            blogDetailRepository.save(blogDetail);
+        } else {
+            updatePublish(findLastBlogDetail, entry);
         }
     }
 
