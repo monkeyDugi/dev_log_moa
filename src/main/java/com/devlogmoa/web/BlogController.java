@@ -1,6 +1,5 @@
 package com.devlogmoa.web;
 
-import com.devlogmoa.domain.BlogDetail;
 import com.devlogmoa.repository.BlogDetailRepository;
 import com.devlogmoa.web.dto.response.BlogDetailDto;
 import lombok.RequiredArgsConstructor;
