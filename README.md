@@ -54,3 +54,32 @@ awesome-devblog는 내가 구독하여 볼 수 있는 기능과 미리보기 기
 - 단순히 조회만 하고, view 로직에 의해 Entity가 변경될 위험이 없다면  
   Dto가 필요 없을 수도 있다.  
   하지만 오히려 혼란을 만들 수도 있을 것 같아 무조건 ResponseDto, RequestDto를 생성한다.
+  
+## 개발 환경
+
+---
+### 인프라
+- AWS EC2
+Amazon Linux 2 AMI (HVM), SSD Volume Type  
+  => AMI(Amazon Machine Image)는 EC2 인스턴스를 시작하는데 **필요한 정보를 이미지로 만둘어 둔 것**
+- RDS  
+  
+### 빌드 툴
+- gradle : 6.8.3
+
+### 백엔드
+- Spring Boot : 2.4.5
+- JPA  
+  => hibernate : 5.4.30.Final
+- DB  
+  => 운영 : MariaDB  
+  => 로컬 : h2
+- JAVA : 8  
+  
+### 프론트 엔드
+- thymeleaf : 2.4.5
+
+### 주요 라이브러리
+- Quartz : 2.4.5
+- ROME : 1.0
+
