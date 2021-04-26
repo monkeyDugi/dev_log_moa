@@ -59,10 +59,20 @@ awesome-devblog는 내가 구독하여 볼 수 있는 기능과 미리보기 기
 
 ---
 ### 인프라
-- AWS EC2
-Amazon Linux 2 AMI (HVM), SSD Volume Type  
+- AWS EC2 : Amazon Linux 2 AMI (HVM), SSD Volume Type  
   => AMI(Amazon Machine Image)는 EC2 인스턴스를 시작하는데 **필요한 정보를 이미지로 만둘어 둔 것**
-- RDS  
+- RDS : Maria DB  
+  선택이유  
+  1. 저렴한 가격
+  2. Amazon Aurora 교체의 용이성 : 월 10만원 기본 요금
+     - RDS 보다 성능이 훨씬 좋다.
+     - AWS에서 직접 관리하기 때문에 여러가지 기능이 있고, 계속 발전 중
+     - MySQL, MariaDB, PostgreSQL을 지원 하기 때문에 굳이 MSSQL, 오라클을 선택하지 않는다.
+  3. MySQL 보다 좋은 점
+     - 향상된 성능
+     - 활성화된 커뮤니티
+     - 다양한 기능
+     - 다양한 스토리지 엔진
   
 ### 빌드 툴
 - gradle : 6.8.3
