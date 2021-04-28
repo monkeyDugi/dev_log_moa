@@ -83,6 +83,7 @@ awesome-devblog는 내가 구독하여 볼 수 있는 기능과 미리보기 기
   => hibernate : 5.4.30.Final
 - DB  
   => 운영 : MariaDB  
+     jdbc client : 2.7.2
   => 로컬 : h2
 - JAVA : 8  
   
