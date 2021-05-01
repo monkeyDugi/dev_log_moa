@@ -9,3 +9,6 @@
 spring:
   config:
     import: application-real-db.yml
+  jpa:
+    properties:
+      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
