@@ -8,6 +8,4 @@
 
 spring:
   config:
-    activate:
-      on-profile: real
     import: application-real-db.yml
