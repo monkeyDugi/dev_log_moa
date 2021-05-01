@@ -1,5 +1,5 @@
 # Travis CI 설정
-# codedeploy에서는 사용되지 않는거
+# codede ploy에서는 사용되지 않는거
 
 language: java
 jdk:
