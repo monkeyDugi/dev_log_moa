@@ -8,6 +8,6 @@
 
 spring:
   config:
-    activate:
-      on-profile: real
+#    activate:
+#      on-profile: real
     import: real-db
