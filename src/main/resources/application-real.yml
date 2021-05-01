@@ -1,7 +1,13 @@
+#spring:
+#  profiles:
+#    include: real-db
+#  jpa:
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
 spring:
-  profiles:
-    include: real-db
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  config:
+    activate:
+      on-profile: real
+    import: real-db.yml
