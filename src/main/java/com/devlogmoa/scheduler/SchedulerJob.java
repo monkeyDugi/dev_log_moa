@@ -1,5 +1,6 @@
 package com.devlogmoa.scheduler;
 
+import com.devlogmoa.repository.BlogRepository;
 import com.devlogmoa.util.CustomBeanUtil;
 import lombok.SneakyThrows;
 import org.quartz.Job;
@@ -15,10 +16,10 @@ public class SchedulerJob implements Job {
     @SneakyThrows
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        RssReader bean = (RssReader) CustomBeanUtil.getBean("rssReader");
+        RssReader rssReader = (RssReader) CustomBeanUtil.getBean("rssReader");
+        rssReader.createRssData("https://dev-monkey-dugi.tistory.com/", "https://dev-monkey-dugi.tistory.com/rss");
+        rssReader.createRssData("https://jojoldu.tistory.com/", "https://jojoldu.tistory.com/rss");
 
-        bean.createRssData("https://dev-monkey-dugi.tistory.com/");
-        bean.createRssData("https://monkey-dugi.tistory.com/");
-        bean.createRssData("https://jojoldu.tistory.com/");
+        rssReader.createRssData("https://woowabros.github.io/", "https://woowabros.github.io/feed.xml");
     }
 }

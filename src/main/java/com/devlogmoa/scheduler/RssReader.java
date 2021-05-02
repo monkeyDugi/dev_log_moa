@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -27,16 +26,14 @@ public class RssReader {
     private final BlogDetailRepository blogDetailRepository;
 
     @Transactional
-    public void createRssData(String url) throws IOException, FeedException {
-        String blogRssLink = url + "rss";
-
-        SyndFeed feed = new SyndFeedInput().build(new XmlReader(new URL(blogRssLink)));
+    public void createRssData(String url, String rssUrl) throws IOException, FeedException {
+        SyndFeed feed = new SyndFeedInput().build(new XmlReader(new URL(rssUrl)));
         List<SyndEntry> entries = feed.getEntries();
 
         String blogLink = feed.getLink();
         String blogTitle = feed.getTitle();
 
-        Blog blog = createBlog(blogLink, blogRssLink, blogTitle);
+        Blog blog = createBlog(blogLink, rssUrl, blogTitle);
         createBlogDetail(blog, entries);
     }
 
