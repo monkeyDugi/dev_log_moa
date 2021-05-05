@@ -1,6 +1,6 @@
 package com.devlogmoa.scheduler;
 
-import com.devlogmoa.repository.BlogRepository;
+import com.devlogmoa.Yml;
 import com.devlogmoa.util.CustomBeanUtil;
 import lombok.SneakyThrows;
 import org.quartz.Job;

@@ -1,0 +1,14 @@
+servers:
+  blog:
+    -
+      url: https://dev -monkey-dugi.tistory.com/
+      rssUrl: https://dev-monkey-dugi.tistory.com/rss
+      description: 더기이
+    -
+      url: https://jojoldu.tistory.com/
+      rssUrl: https://jojoldu.tistory.com/rss
+      description: 기억보단 기록을
+    -
+      url: https://woowabros.github.io/
+      rssUrl: https://woowabros.github.io/feed.xml
+      description: 우아한 형제들

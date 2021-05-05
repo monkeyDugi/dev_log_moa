@@ -1,4 +1,6 @@
 spring:
+  config:
+    import: application-bloglist.yml
   datasource:
     url: jdbc:h2:tcp://localhost/~/devlogmoa
     username: sa
