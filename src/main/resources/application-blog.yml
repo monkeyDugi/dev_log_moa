@@ -1,0 +1,27 @@
+blogs:
+  list:
+    -
+      url: https://dev -monkey-dugi.tistory.com/
+      rssUrl: https://dev-monkey-dugi.tistory.com/rss
+      description: 더기이
+    -
+      url: https://jojoldu.tistory.com/
+      rssUrl: https://jojoldu.tistory.com/rss
+      description: 기억보단 기록을
+    -
+      url: https://woowabros.github.io/
+      rssUrl: https://woowabros.github.io/feed.xml
+      description: 우아한 형제들
+    -
+      url: https://brunch.co.kr/@javajigi/
+      rssUrl: https://brunch.co.kr/rss/@@5tdm
+      description: 박재성
+    -
+      url: https://johngrib.github.io/
+      rssUrl: https://johngrib.github.io/feed.xml
+      description: 기계인간
+      # description 태그가 없기 때문에 현재 불가.
+#    -
+#      url: https://medium.com/daangn
+#      rssUrl: https://medium.com/feed/daangn
+#      description: 당근마켓

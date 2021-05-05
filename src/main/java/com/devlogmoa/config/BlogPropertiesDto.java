@@ -1,6 +1,6 @@
-package com.devlogmoa;
+package com.devlogmoa.config;
 
-public class MyPojo {
+public class BlogPropertiesDto {
 
     private String url;
     private String rssUrl;
