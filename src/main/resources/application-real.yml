@@ -1,6 +1,7 @@
 spring:
   config:
-    import: application-real-db.yml, application-blog.yml
+    import: application-real-db.yml,application-blog.yml
+
   jpa:
     properties:
       dialect: org.hibernate.dialect.MySQL5InnoDBDialect
