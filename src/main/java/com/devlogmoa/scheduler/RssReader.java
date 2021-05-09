@@ -52,7 +52,7 @@ public class RssReader {
     }
 
     private void createBlogDetail(Blog blog, List<SyndEntry> entries) {
-        BlogDetail findLastBlogDetail = blogDetailRepository.findByBlogIdMaxPurDate(blog.getId());
+        BlogDetail findLastBlogDetail = blogDetailRepository.findTopByBlogIdOrderByPubDateDesc(blog.getId());
 
         for (SyndEntry entry : entries) {
             mergeBlogDetail(blog, entry, findLastBlogDetail);

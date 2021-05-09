@@ -9,7 +9,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         #        show_sql: true # System.out으로 찍기 때문에 쓰지 말자.
@@ -20,3 +20,4 @@ logging:
   level:
     org.hibernate.SQL: debug # 로거로 찍기 때문에 사용하자.
     org.hibernate.type: trace # query parameter 보여줌.
+    com.devson.pagination: debug # 페이징 로그

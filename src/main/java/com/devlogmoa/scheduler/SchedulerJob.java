@@ -13,6 +13,7 @@ import java.util.List;
 /**
  * RssReader의 bean을 조회하여 사용한다.
  * Job을 quartz에서 설정 주기 마다 execute 메서드를 실행하기 때문에 bean에서 관리할 필요 없다.
+ * bean 등록이 되어있지 않기 때문에 getBean으로 직접 가져와야 한다.
  */
 public class SchedulerJob implements Job {
 

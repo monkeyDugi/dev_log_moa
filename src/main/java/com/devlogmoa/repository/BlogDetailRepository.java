@@ -1,47 +1,12 @@
 package com.devlogmoa.repository;
 
 import com.devlogmoa.domain.BlogDetail;
-import lombok.RequiredArgsConstructor;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import java.util.List;
 
-@RequiredArgsConstructor
-@Repository
-public class BlogDetailRepository {
+public interface BlogDetailRepository extends JpaRepository<BlogDetail, Long> {
 
-    private final EntityManager em;
-
-    public void save(BlogDetail blogDetail) {
-        em.persist(blogDetail);
-    }
-
-    public BlogDetail findByBlogIdMaxPurDate(Long blogId) {
-        String sql = "select b " +
-                       "from BlogDetail b " +
-                      "where b.blog.id=:blogId " +
-                      "order by b.pubDate desc";
-
-        try {
-            return em.createQuery(sql, BlogDetail.class)
-                    .setParameter("blogId", blogId)
-                    .setFirstResult(0)
-                    .setMaxResults(1)
-                    .getSingleResult();
-        } catch (EmptyResultDataAccessException | NoResultException e) {
-            return null;
-        }
-    }
-
-    public List<BlogDetail> findAll() {
-        String sql = "select b from BlogDetail b join fetch b.blog order by b.pubDate desc";
-
-        return em.createQuery(sql, BlogDetail.class)
-                .setFirstResult(0)
-                .setMaxResults(20)
-                .getResultList();
-    }
+    BlogDetail findTopByBlogIdOrderByPubDateDesc(Long blog_id);
+    List<BlogDetail> findTop20ByOrderByPubDateDesc();
 }

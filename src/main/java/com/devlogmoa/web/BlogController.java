@@ -18,7 +18,7 @@ public class BlogController {
 
     @GetMapping("/")
     public String blogs(Model model) {
-        List<BlogDetailDto> blogDetails = blogDetailRepository.findAll()
+        List<BlogDetailDto> blogDetails = blogDetailRepository.findTop20ByOrderByPubDateDesc()
                 .stream()
                 .map(BlogDetailDto::new)
                 .collect(Collectors.toList());
