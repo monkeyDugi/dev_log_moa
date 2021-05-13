@@ -5,8 +5,6 @@ import com.devlogmoa.web.dto.response.BlogDetailDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +16,7 @@ public class BlogController {
     private final BlogDetailRepository blogDetailRepository;
 
     @GetMapping("/")
-    public String blogs(Model model, @PageableDefault(page = 0, size = 2, direction = Sort.Direction.DESC) Pageable pageable) {
+    public String blogs(Model model, Pageable pageable) {
         Page<BlogDetailDto> blogDetails = blogDetailRepository.findAllByOrderByPubDateDesc(pageable)
                                                             .map(BlogDetailDto::new);
 
