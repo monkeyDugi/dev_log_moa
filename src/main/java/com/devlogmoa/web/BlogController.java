@@ -23,18 +23,13 @@ public class BlogController {
 
     private final BlogDetailRepository blogDetailRepository;
 
-//    @ResponseBody
     @GetMapping("/")
     public String blogs(Model model, @PageableDefault(page = 0, size = 2, direction = Sort.Direction.DESC) Pageable pageable) {
-//    public Page<BlogDetail> blogs(Model model, @PageableDefault(page = 0, size = 10, direction = Sort.Direction.DESC) Pageable pageable) {
-        Page<BlogDetail> blogDetails = blogDetailRepository.findAllByOrderByPubDateDesc(pageable);
-//                .stream()
-//                .map(BlogDetailDto::new)
-//                .collect(Collectors.toList());
+        Page<BlogDetailDto> blogDetails = blogDetailRepository.findAllByOrderByPubDateDesc(pageable)
+                                                            .map(BlogDetailDto::new);
 
         model.addAttribute("blogDetails", blogDetails);
 
         return "blogList";
-//        return blogDetails;
     }
 }
