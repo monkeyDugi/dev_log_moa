@@ -1,4 +1,4 @@
-package com.devlogmoa.config;
+package com.devlogmoa.config.blog;
 
 import lombok.Getter;
 import lombok.Setter;

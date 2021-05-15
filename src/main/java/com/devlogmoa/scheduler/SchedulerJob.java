@@ -1,7 +1,7 @@
 package com.devlogmoa.scheduler;
 
-import com.devlogmoa.config.BlogProperties;
-import com.devlogmoa.config.BlogPropertiesDto;
+import com.devlogmoa.config.blog.BlogProperties;
+import com.devlogmoa.config.blog.BlogPropertiesDto;
 import com.devlogmoa.util.CustomBeanUtil;
 import lombok.SneakyThrows;
 import org.quartz.Job;
