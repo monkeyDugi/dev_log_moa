@@ -5,6 +5,14 @@
   <link rel="stylesheet" href="/css/bootstrap.css">
 </head>
 <body>
+<nav class="navbar navbar-expand-sm navbar-warning bg-warning fixed-top">
+  <div th:style="${memberName == null ? '' : 'display:none'}">
+    <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">GoogleLogin</a>
+  </div>
+  <div th:style="${memberName != null ? '' : 'display:none'}">
+    <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+  </div>
+</nav>
 <div class="table-responsive">
   <table class="table table-hover">
     <thead>

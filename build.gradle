@@ -38,10 +38,18 @@ dependencies {
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
+	// 소셜 로그인 의존성
+	compile('org.springframework.boot:spring-boot-starter-oauth2-client')
+
+	// DB를 세션 저장소로 사용하기 위한 의존성
+	implementation 'org.springframework.session:spring-session-jdbc'
+
 	// @ConfigurationProperties
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+
 }
 
 test {
