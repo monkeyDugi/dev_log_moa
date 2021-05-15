@@ -1,6 +1,6 @@
 package com.devlogmoa.web;
 
-import com.devlogmoa.repository.BlogDetailRepository;
+import com.devlogmoa.repository.blog.BlogDetailRepository;
 import com.devlogmoa.web.dto.response.BlogDetailDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

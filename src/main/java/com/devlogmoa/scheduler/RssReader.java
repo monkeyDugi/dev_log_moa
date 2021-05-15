@@ -2,8 +2,8 @@ package com.devlogmoa.scheduler;
 
 import com.devlogmoa.domain.blog.Blog;
 import com.devlogmoa.domain.blog.BlogDetail;
-import com.devlogmoa.repository.BlogDetailRepository;
-import com.devlogmoa.repository.BlogRepository;
+import com.devlogmoa.repository.blog.BlogDetailRepository;
+import com.devlogmoa.repository.blog.BlogRepository;
 import com.devlogmoa.web.dto.RssDto;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;

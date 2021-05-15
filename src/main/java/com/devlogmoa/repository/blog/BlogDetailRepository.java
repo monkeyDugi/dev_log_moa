@@ -1,4 +1,4 @@
-package com.devlogmoa.repository;
+package com.devlogmoa.repository.blog;
 
 import com.devlogmoa.domain.blog.BlogDetail;
 import org.springframework.data.domain.Page;
