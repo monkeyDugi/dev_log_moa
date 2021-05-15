@@ -1,6 +1,6 @@
 package com.devlogmoa.web.dto;
 
-import com.devlogmoa.domain.Blog;
+import com.devlogmoa.domain.blog.Blog;
 import com.sun.syndication.feed.synd.SyndEntry;
 import lombok.Getter;
 import lombok.Setter;

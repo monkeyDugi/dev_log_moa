@@ -1,6 +1,6 @@
 package com.devlogmoa.repository;
 
-import com.devlogmoa.domain.BlogDetail;
+import com.devlogmoa.domain.blog.BlogDetail;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

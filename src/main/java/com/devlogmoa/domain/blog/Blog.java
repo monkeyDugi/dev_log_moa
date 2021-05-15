@@ -1,7 +1,6 @@
-package com.devlogmoa.domain;
+package com.devlogmoa.domain.blog;
 
 import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
 

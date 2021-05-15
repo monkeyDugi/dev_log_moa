@@ -1,7 +1,7 @@
 package com.devlogmoa.web.dto.response;
 
-import com.devlogmoa.domain.Blog;
-import com.devlogmoa.domain.BlogDetail;
+import com.devlogmoa.domain.blog.Blog;
+import com.devlogmoa.domain.blog.BlogDetail;
 import lombok.Getter;
 import lombok.Setter;
 

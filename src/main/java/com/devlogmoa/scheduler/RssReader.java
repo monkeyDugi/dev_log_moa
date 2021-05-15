@@ -1,7 +1,7 @@
 package com.devlogmoa.scheduler;
 
-import com.devlogmoa.domain.Blog;
-import com.devlogmoa.domain.BlogDetail;
+import com.devlogmoa.domain.blog.Blog;
+import com.devlogmoa.domain.blog.BlogDetail;
 import com.devlogmoa.repository.BlogDetailRepository;
 import com.devlogmoa.repository.BlogRepository;
 import com.devlogmoa.web.dto.RssDto;
@@ -38,7 +38,7 @@ public class RssReader {
     }
 
     private Blog createBlog(String blogLink, String blogRssLink, String blogTitle) {
-        Blog findByBlog = blogRepository.findByLink(blogLink);
+        Blog findByBlog = blogRepository.findByBlogLink(blogLink);
 
         if (findByBlog == null) {
             Blog blog = Blog.createBlog(blogLink, blogRssLink, blogTitle);

@@ -1,7 +1,6 @@
-package com.devlogmoa.domain;
+package com.devlogmoa.domain.blog;
 
 import com.devlogmoa.web.dto.RssDto;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -16,7 +15,6 @@ public class BlogDetail {
     @Column(name = "blog_detail_id")
     private Long id;
 
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "blog_id")
     private Blog blog;
