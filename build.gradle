@@ -5,7 +5,6 @@ plugins {
 }
 
 group = 'com.devlogmoa'
-version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 configurations {
@@ -16,7 +15,12 @@ configurations {
 }
 
 configurations {
-	jar.archiveName = 'dev_log_moa_1.0.0' + new Date().format("yyyyMMddHHmmss") + '.jar'
+	jar.archiveName =
+}
+
+bootJar{
+	archivesBaseName = 'dev_log_moa_1.0.0'
+	archiveFileName = 'dev_log_moa_1.0.0' + new Date().format("yyyyMMddHHmmss") + '.jar'
 }
 repositories {
 	mavenCentral()
