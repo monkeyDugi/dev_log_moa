@@ -15,10 +15,9 @@ configurations {
 	}
 }
 
-bootJar {
-	archiveFileName = 'dev_log_moa_1.0.1-SNAPSHOT-' + new Date().format("yyyyMMddHHmmss") + '.jar'
+configurations {
+	jar.archiveName = 'dev_log_moa_1.0.0' + new Date().format("yyyyMMddHHmmss") + '.jar'
 }
-
 repositories {
 	mavenCentral()
 }
