@@ -1,35 +1,9 @@
 package com.devlogmoa.repository;
 
-import com.devlogmoa.domain.Blog;
-import lombok.RequiredArgsConstructor;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.stereotype.Repository;
+import com.devlogmoa.domain.blog.Blog;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
+public interface BlogRepository extends JpaRepository<Blog, Long> {
 
-@RequiredArgsConstructor
-@Repository
-public class BlogRepository {
-
-    private final EntityManager em;
-
-    public void save(Blog blog) {
-        em.persist(blog);
-    }
-
-    public Blog findByLink(String blogLink) {
-        String sql = "select b " +
-                       "From Blog b " +
-                      "where b.blogLink=:blogLink";
-
-        try {
-            return em.createQuery(sql, Blog.class)
-                    .setParameter("blogLink", blogLink)
-                    .getSingleResult();
-        } catch (EmptyResultDataAccessException | NoResultException e) {
-            return null;
-        }
-    }
-
+    Blog findByBlogLink(String blogLink);
 }
