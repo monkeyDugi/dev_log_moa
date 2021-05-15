@@ -16,9 +16,7 @@ configurations {
 }
 
 bootJar {
-	archivesBaseName = 'dev_log_moa'
-	archiveFileName = 'dev_log_moa.jar'
-	archiveVersion = '1.0.1-SNAPSHOT-' + new Date().format("yyyyMMddHHmmss")
+	archiveFileName = 'dev_log_moa_1.0.1-SNAPSHOT-' + new Date().format("yyyyMMddHHmmss") + '.jar'
 }
 
 repositories {
