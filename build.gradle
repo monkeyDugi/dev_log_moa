@@ -9,9 +9,16 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 configurations {
-	compileOnly {
+	compileOnly {;
+
 		extendsFrom annotationProcessor
 	}
+}
+
+bootJar {
+	archivesBaseName = 'dev_log_moa'
+	archiveFileName = 'dev_log_moa.jar'
+	archiveVersion = '1.0.1-SNAPSHOT-' + new Date().format("yyyyMMddHHmmss")
 }
 
 repositories {
