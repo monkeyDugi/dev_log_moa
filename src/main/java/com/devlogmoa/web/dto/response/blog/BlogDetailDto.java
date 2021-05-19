@@ -1,4 +1,4 @@
-package com.devlogmoa.web.dto.response;
+package com.devlogmoa.web.dto.response.blog;
 
 import com.devlogmoa.domain.blog.Blog;
 import com.devlogmoa.domain.blog.BlogDetail;
