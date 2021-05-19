@@ -1,0 +1,29 @@
+package com.devlogmoa.web.dto.response.blog;
+
+import com.devlogmoa.domain.blog.Blog;
+import com.devlogmoa.domain.member.Member;
+import com.devlogmoa.domain.subscription.Subscription;
+import com.querydsl.core.annotations.QueryProjection;
+import lombok.Builder;
+import lombok.Getter;
+
+@Getter
+public class BlogDto {
+
+    private Long blogId;
+    private String blogTitle;
+    private String blogLink;
+    private String blogRssLink;
+
+    private Long subscriptionId;
+
+    @Builder
+    @QueryProjection
+    public BlogDto(Long blogId, String blogTitle, String blogLink, String blogRssLink, Long subscriptionId) {
+        this.blogId = blogId;
+        this.blogTitle = blogTitle;
+        this.blogLink = blogLink;
+        this.blogRssLink = blogRssLink;
+        this.subscriptionId = subscriptionId;
+    }
+}
