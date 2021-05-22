@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <div class="header" th:fragment="bodyHeader">
-  <ul class="nav nav-pills pull-right">
-    <li><a href="/">Home</a></li>
-  </ul>
-  <a href="/"><h3 class="text-muted">HELLO SHOP</h3></a>
+  <nav class="navbar navbar-dark bg-dark">
+    <a href="/" class="btn btn-light" role="button">메인으로</a>
+    <div th:style="${memberName == null ? '' : 'display:none'}">
+      <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">GoogleLogin</a>
+    </div>
+    <div th:style="${memberName != null ? '' : 'display:none'}">
+      <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+      <a href="/blogs" class="btn btn-success active" role="button">블로그 목록</a>
+    </div>
+  </nav>
 </div>

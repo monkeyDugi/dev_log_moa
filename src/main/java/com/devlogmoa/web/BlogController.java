@@ -13,7 +13,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @RequiredArgsConstructor
 @Controller
@@ -23,7 +22,8 @@ public class BlogController {
     private final BlogRepository blogRepository;
 
     @GetMapping("/")
-    public String getBlogPosts(Model model, @PageableDefault(size = 10) Pageable pageable, @LoginMember SessionMember member) {
+    public String getPosts(Model model, @PageableDefault(size = 10) Pageable pageable, @LoginMember SessionMember member) {
+
         Page<BlogDetailDto> blogDetails = blogDetailRepository.findAllByOrderByPubDateDesc(pageable)
                 .map(BlogDetailDto::new);
 
@@ -33,12 +33,19 @@ public class BlogController {
             model.addAttribute("memberName", member);
         }
 
-        return "blogList";
+        return "posts";
     }
 
-    @ResponseBody
     @GetMapping("/blogs")
-    public Page<BlogDto> getBlogs(Model model, @PageableDefault(size = 10) Pageable pageable, @LoginMember SessionMember member) {
-        return blogRepository.findAllBlog("test@email", pageable);
+    public String getBlogs(Model model, @PageableDefault(size = 10) Pageable pageable, @LoginMember SessionMember member) {
+        Page<BlogDto> blogs = blogRepository.findAllBlog(member.getEmail(), pageable);
+
+        model.addAttribute("blogs", blogs);
+
+        if (member != null) {
+            model.addAttribute("memberName", member);
+        }
+
+        return "blogs";
     }
 }
