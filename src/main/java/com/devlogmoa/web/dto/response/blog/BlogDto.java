@@ -1,8 +1,5 @@
 package com.devlogmoa.web.dto.response.blog;
 
-import com.devlogmoa.domain.blog.Blog;
-import com.devlogmoa.domain.member.Member;
-import com.devlogmoa.domain.subscription.Subscription;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Builder;
 import lombok.Getter;
