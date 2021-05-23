@@ -9,14 +9,13 @@ import com.devlogmoa.repository.blog.BlogRepository;
 import com.devlogmoa.repository.member.MemberRepository;
 import com.devlogmoa.repository.subscription.SubscriptionRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
-@Controller
+@RestController
 public class SubscriptionController {
 
     private final MemberRepository memberRepository;
@@ -24,7 +23,7 @@ public class SubscriptionController {
     private final BlogRepository blogRepository;
 
     @PostMapping("/api/blog/subscription/{blogId}")
-    public void createSubscription(@PathVariable("blogId") Long blogId, @LoginMember SessionMember member) {
+    public void saveSubscription(@PathVariable("blogId") Long blogId, @LoginMember SessionMember member) {
         Member findMember = memberRepository.findByEmail(member.getEmail()).get();
         Blog findBlog = blogRepository.findById(blogId).get();
 
@@ -33,7 +32,7 @@ public class SubscriptionController {
     }
 
     @DeleteMapping("/api/blog/subscription/{subscriptionId}")
-    public void destroySubscription(@PathVariable("subscriptionId") Long subscriptionId) {
+    public void deleteSubscription(@PathVariable("subscriptionId") Long subscriptionId) {
         subscriptionRepository.deleteById(subscriptionId);
     }
 }

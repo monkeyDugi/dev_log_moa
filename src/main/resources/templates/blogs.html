@@ -14,18 +14,20 @@
     </thead>
     <tbody>
     <tr th:each="blog : ${blogs}">
-      <td th:name="blogId" th:id="blogId" th:text="${blog.blogTitle}" th:value="${blog.blogId}"></td>
+      <td th:name="blogId" th:id="blogId" th:text="${blog.blogTitle}" th:data-id="${blog.blogId}"></td>
       <td>
         <a th:href="${blog.blogLink}">
           구경하기
         </a>
       </td>
-      <td th:name="subscriptionId" th:id="subscriptionId" th:value="${blog.subscriptionId}"
-          th:text="${blog.subscriptionId == null} ? '구독하기' : '구독취소'"></td>
+      <td>
+        <button th:name="btn-subscription" th:id="btn-subscription" th:value="${blog.subscriptionId}"
+                th:text="${blog.subscriptionId == null} ? '구독하기' : '구독중'">
+        </button>
+      </td>
     </tr>
     </tbody>
   </table>
-
   <!-- 페이징 -->
   <div th:if="${!blogs.isEmpty()}">
     <!-- 전역 변수 선언 -->
@@ -80,5 +82,6 @@
     </nav>
   </div>
   <div th:replace="fragments/footer :: footer" />
+  <script type="text/javascript" src="/js/blogs.js"></script>
 </body>
 </html>
