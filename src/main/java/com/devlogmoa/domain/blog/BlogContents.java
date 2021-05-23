@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Getter
 @Entity
-public class BlogDetail {
+public class BlogContents {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,15 +40,15 @@ public class BlogDetail {
         this.contents = rssDto.getContents();
     }
 
-    public static BlogDetail createPublish(RssDto rssDto) {
-        BlogDetail blogDetail = new BlogDetail();
+    public static BlogContents createPublish(RssDto rssDto) {
+        BlogContents blogContents = new BlogContents();
 
-        blogDetail.pubLink = rssDto.getPubLink();
-        blogDetail.pubDate = rssDto.getPubDate();
-        blogDetail.title = rssDto.getTitle();
-        blogDetail.contents = rssDto.getContents();
-        blogDetail.blog = rssDto.getBlog();
+        blogContents.pubLink = rssDto.getPubLink();
+        blogContents.pubDate = rssDto.getPubDate();
+        blogContents.title = rssDto.getTitle();
+        blogContents.contents = rssDto.getContents();
+        blogContents.blog = rssDto.getBlog();
 
-        return blogDetail;
+        return blogContents;
     }
 }

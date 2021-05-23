@@ -90,7 +90,9 @@ awesome-devblog는 내가 구독하여 볼 수 있는 기능이 아쉬웠다.
   => 운영 : MariaDB  
      jdbc client : 2.7.2
   => 로컬 : h2
-- JAVA : 8  
+- JAVA : 8 
+- Lombok : 1.18.20
+- querydsl : 4 ~~ 버전
   
 ### 프론트 엔드
 - thymeleaf : 2.4.5
@@ -98,4 +100,8 @@ awesome-devblog는 내가 구독하여 볼 수 있는 기능이 아쉬웠다.
 ### 주요 라이브러리
 - Quartz : 2.4.5
 - ROME : 1.0
+
+### 규약
+- [naver conding convention](https://naver.github.io/hackday-conventions-java/)
+- [rest api](https://meetup.toast.com/posts/92)
 
