@@ -22,4 +22,12 @@ public class Subscription {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    public static Subscription Subscribe(Blog blog, Member member) {
+        Subscription subscription = new Subscription();
+        subscription.blog = blog;
+        subscription.member = member;
+
+        return subscription;
+    }
 }

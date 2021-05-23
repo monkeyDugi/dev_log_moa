@@ -12,27 +12,27 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="blogDetail : ${blogDetails}">
-      <td th:text="${blogDetail.pubDate}"></td>
-      <td th:text="${blogDetail.title}"></td>
+    <tr th:each="blogContent : ${blogContents}">
+      <td th:text="${blogContent.pubDate}"></td>
+      <td th:text="${blogContent.title}"></td>
       <td>
-        <a th:href="${blogDetail.pubLink}">
+        <a th:href="${blogContent.pubLink}">
           보기
         </a>
       </td>
-      <td th:text="${blogDetail.blog.blogTitle}"></td>
+      <td th:text="${blogContent.blog.blogTitle}"></td>
     </tr>
     </tbody>
   </table>
 
   <!-- 페이징 -->
-  <div th:if="${!blogDetails.isEmpty()}">
+  <div th:if="${!blogContents.isEmpty()}">
     <!-- 전역 변수 선언 -->
     <nav
             th:with="
-                pageNumber = ${blogDetails.pageable.pageNumber},
-                pageSize = ${blogDetails.pageable.pageSize},
-                totalPages = ${blogDetails.totalPages},
+                pageNumber = ${blogContents.pageable.pageNumber},
+                pageSize = ${blogContents.pageable.pageSize},
+                totalPages = ${blogContents.totalPages},
                 startPage = ${T(Math).floor(pageNumber / pageSize) * pageSize + 1},
                 tempEndPage = ${startPage + pageSize - 1},
                 endPage = (${tempEndPage < totalPages ? tempEndPage : totalPages})"
@@ -48,8 +48,8 @@
         </li>
 
         <!-- 이전으로 이동 -->
-        <li th:classappend="${blogDetails.first} ? 'disabled'" class="page-item">
-          <a class="page-link" th:href="${blogDetails.first} ? '#' : @{/(page=${pageNumber - 1})}" aria-label="Previous">
+        <li th:classappend="${blogContents.first} ? 'disabled'" class="page-item">
+          <a class="page-link" th:href="${blogContents.first} ? '#' : @{/(page=${pageNumber - 1})}" aria-label="Previous">
             <span aria-hidden="true">&lt;</span>
             <span class="sr-only">Previous</span>
           </a>
@@ -61,8 +61,8 @@
         </li>
 
         <!-- 다음으로 이동 -->
-        <li th:classappend="${blogDetails.last} ? 'disabled'" class="page-item">
-          <a class="page-link" th:href="${blogDetails.last} ? '#' : @{/(page=${pageNumber + 1})}" aria-label="Next">
+        <li th:classappend="${blogContents.last} ? 'disabled'" class="page-item">
+          <a class="page-link" th:href="${blogContents.last} ? '#' : @{/(page=${pageNumber + 1})}" aria-label="Next">
             <span aria-hidden="true">&gt;</span>
             <span class="sr-only">Next</span>
           </a>

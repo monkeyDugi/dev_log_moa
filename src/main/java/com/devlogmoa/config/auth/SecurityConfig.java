@@ -17,14 +17,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable() //  h2-console 화면을 사용하기 위해 해당 옵션들 disable
                 .and()
                 .authorizeRequests() // 설정된 값 이외 나머지 URL
-                .antMatchers("/", "/blogs", "/css/**", "/js/**", "/h2-console/**").permitAll()
-                .antMatchers("/api/member/**", "/member/**").hasRole(Role.USER.name()) // 권한 관리 대상 지정 옵션
-                .antMatchers("/api/member/**", "/member/**").hasRole(Role.ADMIN.name()) // 권한 관리 대상 지정 옵션
-                // URL, HTTP 메소드별로 관리 가능
+                .antMatchers("/", "/css/**", "/js/**", "/h2-console/**").permitAll()
+//                .antMatchers("/blogs").hasRole(Role.ADMIN.name()) // 권한 관리 대상 지정 옵션
+                // URL, HTTP 메소드별로9 관리 가능
                 // "/" 등 지정된 URL들은 permitALL() 옵션으로 전체 열람 권한을 줌
                 // 해당 주소는 USER 권한을 가진 사람만 접속 가능
                 .anyRequest().authenticated() // anyRequest(). : 위의 설정 값 이외 URL은
-                // authenticated() : 인증된 사용자만 가능(로그인한 사용자)
+//                 authenticated() : 인증된 사용자만 가능(로그인한 사용자)
                 // 현재는 Role.USER만 사용 하므로 의미는 없음
                 // Role권한을 주지 않고, 로그엔 체크만 하려면 이것만 사용하면 됨
                 .and()

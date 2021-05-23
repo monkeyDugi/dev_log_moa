@@ -1,8 +1,8 @@
 package com.devlogmoa.scheduler;
 
 import com.devlogmoa.domain.blog.Blog;
-import com.devlogmoa.domain.blog.BlogDetail;
-import com.devlogmoa.repository.blog.BlogDetailRepository;
+import com.devlogmoa.domain.blog.BlogContents;
+import com.devlogmoa.repository.blog.BlogContentsRepository;
 import com.devlogmoa.repository.blog.BlogRepository;
 import com.devlogmoa.web.dto.RssDto;
 import com.sun.syndication.feed.synd.SyndEntry;
@@ -23,7 +23,7 @@ import java.util.List;
 public class RssReader {
 
     private final BlogRepository blogRepository;
-    private final BlogDetailRepository blogDetailRepository;
+    private final BlogContentsRepository blogContentsRepository;
 
     @Transactional
     public void createRssData(String url, String rssUrl) throws IOException, FeedException {
@@ -34,7 +34,7 @@ public class RssReader {
         String blogTitle = feed.getTitle();
 
         Blog blog = createBlog(blogLink, rssUrl, blogTitle);
-        createBlogDetail(blog, entries);
+        createBlogContents(blog, entries);
     }
 
     private Blog createBlog(String blogLink, String blogRssLink, String blogTitle) {
@@ -51,26 +51,26 @@ public class RssReader {
         return findByBlog;
     }
 
-    private void createBlogDetail(Blog blog, List<SyndEntry> entries) {
-        BlogDetail findLastBlogDetail = blogDetailRepository.findTopByBlogIdOrderByPubDateDesc(blog.getId());
+    private void createBlogContents(Blog blog, List<SyndEntry> entries) {
+        BlogContents findLastBlogContents = blogContentsRepository.findTopByBlogIdOrderByPubDateDesc(blog.getId());
 
         for (SyndEntry entry : entries) {
-            mergeBlogDetail(blog, entry, findLastBlogDetail);
+            mergeBlogDetail(blog, entry, findLastBlogContents);
         }
     }
 
-    private void mergeBlogDetail(Blog blog, SyndEntry entry, BlogDetail findLastBlogDetail) {
+    private void mergeBlogDetail(Blog blog, SyndEntry entry, BlogContents findLastBlogDetail) {
 
         if (findLastBlogDetail == null || findLastBlogDetail.isNewPublish(entry.getPublishedDate(), entry.getLink())) {
-            BlogDetail blogDetail = BlogDetail.createPublish(RssDto.newRss(entry, blog));
+            BlogContents blogDetail = BlogContents.createPublish(RssDto.newRss(entry, blog));
 
-            blogDetailRepository.save(blogDetail);
+            blogContentsRepository.save(blogDetail);
         } else {
             updatePublish(findLastBlogDetail, entry);
         }
     }
 
-    private void updatePublish(BlogDetail findLastBlogDetail, SyndEntry entry) {
+    private void updatePublish(BlogContents findLastBlogDetail, SyndEntry entry) {
         if (findLastBlogDetail.getPubLink().equals(entry.getLink())) {
             findLastBlogDetail.updatePublish(RssDto.existNewRss(entry));
         }
