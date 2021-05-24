@@ -12,7 +12,7 @@ public class BlogContents {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "blog_detail_id")
+    @Column(name = "blog_contents_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
