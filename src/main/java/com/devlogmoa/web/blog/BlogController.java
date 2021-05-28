@@ -21,7 +21,7 @@ public class BlogController {
     private final BlogContentsRepository blogContentsRepository;
     private final BlogRepository blogRepository;
 
-    @GetMapping("/blogs/contents")
+    @GetMapping("/")
     public String getBLogContents(Model model, @PageableDefault(size = 10) Pageable pageable, @LoginMember SessionMember member) {
 
         Page<BlogContentsDto> blogContents = blogContentsRepository.findAllByOrderByPubDateDesc(pageable)
