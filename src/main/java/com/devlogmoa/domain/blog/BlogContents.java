@@ -1,6 +1,6 @@
 package com.devlogmoa.domain.blog;
 
-import com.devlogmoa.web.dto.RssDto;
+import com.devlogmoa.web.dto.response.rss.RssResponseDto;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -34,20 +34,20 @@ public class BlogContents {
         return pubDate.compareTo(publishedDate) < 0 && !this.pubLink.equals(pubLink);
     }
 
-    public void updatePublish(RssDto rssDto) {
-        this.pubDate = rssDto.getPubDate();
-        this.title = rssDto.getTitle();
-        this.contents = rssDto.getContents();
+    public void updatePublish(RssResponseDto rssResponseDto) {
+        this.pubDate = rssResponseDto.getPubDate();
+        this.title = rssResponseDto.getTitle();
+        this.contents = rssResponseDto.getContents();
     }
 
-    public static BlogContents createPublish(RssDto rssDto) {
+    public static BlogContents createPublish(RssResponseDto rssResponseDto) {
         BlogContents blogContents = new BlogContents();
 
-        blogContents.pubLink = rssDto.getPubLink();
-        blogContents.pubDate = rssDto.getPubDate();
-        blogContents.title = rssDto.getTitle();
-        blogContents.contents = rssDto.getContents();
-        blogContents.blog = rssDto.getBlog();
+        blogContents.pubLink = rssResponseDto.getPubLink();
+        blogContents.pubDate = rssResponseDto.getPubDate();
+        blogContents.title = rssResponseDto.getTitle();
+        blogContents.contents = rssResponseDto.getContents();
+        blogContents.blog = rssResponseDto.getBlog();
 
         return blogContents;
     }

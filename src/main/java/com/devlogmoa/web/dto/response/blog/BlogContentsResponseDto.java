@@ -8,7 +8,7 @@ import lombok.Setter;
 import java.util.Date;
 
 @Getter @Setter
-public class BlogContentsDto {
+public class BlogContentsResponseDto {
 
     private Long id;
     private Blog blog;
@@ -16,7 +16,7 @@ public class BlogContentsDto {
     private String title;
     private String pubLink;
 
-    public BlogContentsDto(BlogContents entity) {
+    public BlogContentsResponseDto(BlogContents entity) {
         this.id = entity.getId();
         this.blog = entity.getBlog();
         this.pubDate = entity.getPubDate();

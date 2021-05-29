@@ -5,18 +5,17 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class BlogDto {
+public class BlogResponseDto {
 
     private Long blogId;
     private String blogTitle;
     private String blogLink;
     private String blogRssLink;
-
     private Long subscriptionId;
 
     @Builder
     @QueryProjection
-    public BlogDto(Long blogId, String blogTitle, String blogLink, String blogRssLink, Long subscriptionId) {
+    public BlogResponseDto(Long blogId, String blogTitle, String blogLink, String blogRssLink, Long subscriptionId) {
         this.blogId = blogId;
         this.blogTitle = blogTitle;
         this.blogLink = blogLink;

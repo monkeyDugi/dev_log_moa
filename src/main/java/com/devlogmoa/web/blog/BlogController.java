@@ -4,8 +4,8 @@ import com.devlogmoa.config.auth.LoginMember;
 import com.devlogmoa.config.auth.dto.SessionMember;
 import com.devlogmoa.repository.blog.BlogContentsRepository;
 import com.devlogmoa.repository.blog.BlogRepository;
-import com.devlogmoa.web.dto.response.blog.BlogContentsDto;
-import com.devlogmoa.web.dto.response.blog.BlogDto;
+import com.devlogmoa.web.dto.response.blog.BlogContentsResponseDto;
+import com.devlogmoa.web.dto.response.blog.BlogResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,8 +24,8 @@ public class BlogController {
     @GetMapping("/")
     public String getBLogContents(Model model, @PageableDefault(size = 10) Pageable pageable, @LoginMember SessionMember member) {
 
-        Page<BlogContentsDto> blogContents = blogContentsRepository.findAllByOrderByPubDateDesc(pageable)
-                .map(BlogContentsDto::new);
+        Page<BlogContentsResponseDto> blogContents = blogContentsRepository.findAllByOrderByPubDateDesc(pageable)
+                .map(BlogContentsResponseDto::new);
 
         model.addAttribute("blogContents", blogContents);
 
@@ -38,7 +38,7 @@ public class BlogController {
 
     @GetMapping("/blogs")
     public String getBlogs(Model model, @PageableDefault(size = 10) Pageable pageable, @LoginMember SessionMember member) {
-        Page<BlogDto> blogs = blogRepository.findAllBlog(member.getEmail(), pageable);
+        Page<BlogResponseDto> blogs = blogRepository.findAllBlog(member.getEmail(), pageable);
 
         model.addAttribute("blogs", blogs);
 
