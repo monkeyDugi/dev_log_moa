@@ -4,7 +4,7 @@ import com.devlogmoa.domain.blog.Blog;
 import com.devlogmoa.domain.blog.BlogContents;
 import com.devlogmoa.repository.blog.BlogContentsRepository;
 import com.devlogmoa.repository.blog.BlogRepository;
-import com.devlogmoa.web.dto.RssDto;
+import com.devlogmoa.web.dto.response.rss.RssResponseDto;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.FeedException;
@@ -62,7 +62,7 @@ public class RssReader {
     private void mergeBlogDetail(Blog blog, SyndEntry entry, BlogContents findLastBlogDetail) {
 
         if (findLastBlogDetail == null || findLastBlogDetail.isNewPublish(entry.getPublishedDate(), entry.getLink())) {
-            BlogContents blogDetail = BlogContents.createPublish(RssDto.newRss(entry, blog));
+            BlogContents blogDetail = BlogContents.createPublish(RssResponseDto.newRss(entry, blog));
 
             blogContentsRepository.save(blogDetail);
         } else {
@@ -72,7 +72,7 @@ public class RssReader {
 
     private void updatePublish(BlogContents findLastBlogDetail, SyndEntry entry) {
         if (findLastBlogDetail.getPubLink().equals(entry.getLink())) {
-            findLastBlogDetail.updatePublish(RssDto.existNewRss(entry));
+            findLastBlogDetail.updatePublish(RssResponseDto.existNewRss(entry));
         }
     }
 }
