@@ -23,9 +23,6 @@ public class BlogContents {
     private String title;
     private String pubLink;
 
-    @Lob
-    private String contents;
-
     public boolean isNewPublish(Date publishedDate, String pubLink) {
         if (pubDate == null) {
             return false;
