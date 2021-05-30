@@ -26,7 +26,7 @@ public class RssReader {
     private final BlogContentsRepository blogContentsRepository;
 
     @Transactional
-    public void createRssData(String url, String rssUrl) throws IOException, FeedException {
+    public void createRssData(String rssUrl) throws IOException, FeedException {
         SyndFeed feed = new SyndFeedInput().build(new XmlReader(new URL(rssUrl)));
         List<SyndEntry> entries = feed.getEntries();
 

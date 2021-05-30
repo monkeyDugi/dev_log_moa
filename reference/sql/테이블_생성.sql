@@ -91,4 +91,3 @@ create table SPRING_SESSION_ATTRIBUTES
         foreign key (SESSION_PRIMARY_ID) references SPRING_SESSION (PRIMARY_ID)
             on delete cascade
 );
-
