@@ -19,8 +19,8 @@ public class SchedulerTrigger {
         // 실행 시점을 결정하는 Trigger 생성
         Trigger trigger = TriggerBuilder.newTrigger()
                 .withIdentity("triggerName", Scheduler.DEFAULT_GROUP)
-                .withSchedule(CronScheduleBuilder.cronSchedule("0 * * ? * *"))
-//                .withSchedule(CronScheduleBuilder.cronSchedule("0 0 6 1/1 * ? *"))
+//                .withSchedule(CronScheduleBuilder.cronSchedule("0 * * ? * *"))
+                .withSchedule(CronScheduleBuilder.cronSchedule("0 0 6 1/1 * ? *"))
                 .build();
 
         // 스케줄러 실행 및 JobDetail과 Trigger 정보로 스케줄링
