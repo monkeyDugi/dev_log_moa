@@ -41,10 +41,8 @@ public class SubscriptionController {
         subscriptionRepository.deleteById(subscriptionId);
     }
 
-    @ResponseBody
     @GetMapping("/blogs/Contents/subscriptions")
-    public Page<SubscriptionResponseDto> getSubscription(Model model, @PageableDefault(size = 10) Pageable pageable, @LoginMember SessionMember member) {
-//    public String getSubscription(Model model, @PageableDefault(size = 10) Pageable pageable, @LoginMember SessionMember member) {
+    public String getSubscription(Model model, @PageableDefault(size = 10) Pageable pageable, @LoginMember SessionMember member) {
         Page<SubscriptionResponseDto> subscriptions = subscriptionRepository.findByMemberEmail("lbd4946@gmail.com", pageable);
 
         model.addAttribute("subscriptions", subscriptions);
@@ -53,7 +51,6 @@ public class SubscriptionController {
             model.addAttribute("memberName", member);
         }
 
-        return subscriptions;
-//        return "subscriptions";
+        return "subscriptions";
     }
 }
