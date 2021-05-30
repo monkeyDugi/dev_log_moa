@@ -14,7 +14,6 @@ public class RssResponseDto {
     private Date pubDate;
     private String title;
     private String pubLink;
-    private String contents;
 
     private RssResponseDto() {
 
@@ -27,7 +26,6 @@ public class RssResponseDto {
         rssResponseDto.pubDate = entry.getPublishedDate();
         rssResponseDto.title = entry.getTitle();
         rssResponseDto.pubLink = entry.getLink();
-        rssResponseDto.contents = entry.getDescription().getValue();
 
         return rssResponseDto;
     }
@@ -37,7 +35,6 @@ public class RssResponseDto {
 
         rssResponseDto.pubDate = entry.getPublishedDate();
         rssResponseDto.title = entry.getTitle();
-        rssResponseDto.contents = entry.getDescription().getValue();
 
         return rssResponseDto;
     }

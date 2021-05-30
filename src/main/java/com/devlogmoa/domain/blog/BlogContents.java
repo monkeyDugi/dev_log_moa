@@ -37,7 +37,6 @@ public class BlogContents {
     public void updatePublish(RssResponseDto rssResponseDto) {
         this.pubDate = rssResponseDto.getPubDate();
         this.title = rssResponseDto.getTitle();
-        this.contents = rssResponseDto.getContents();
     }
 
     public static BlogContents createPublish(RssResponseDto rssResponseDto) {
@@ -46,7 +45,6 @@ public class BlogContents {
         blogContents.pubLink = rssResponseDto.getPubLink();
         blogContents.pubDate = rssResponseDto.getPubDate();
         blogContents.title = rssResponseDto.getTitle();
-        blogContents.contents = rssResponseDto.getContents();
         blogContents.blog = rssResponseDto.getBlog();
 
         return blogContents;
