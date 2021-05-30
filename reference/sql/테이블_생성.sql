@@ -8,7 +8,6 @@ create table blog (
 
 create table blog_contents (
                                blog_contents_id bigint auto_increment,
-                               contents longtext,
                                pub_date timestamp,
                                pub_link varchar(255),
                                title varchar(255),
