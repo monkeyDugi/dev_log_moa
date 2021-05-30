@@ -42,6 +42,7 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepositoryCustom 
                 .on(QBlog.blog.id.eq(QBlogContents.blogContents.blog.id))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
+                .orderBy(QBlogContents.blogContents.pubDate.desc())
                 .fetchResults();
 
         return new PageImpl<>(result.getResults(), pageable, result.getTotal());
