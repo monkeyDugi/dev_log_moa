@@ -24,6 +24,10 @@ blogs:
       url: https://taetaetae.github.io/
       rssUrl: https://taetaetae.github.io/index.xml
       description: 꿈꾸는 태태태의 공간
+    -
+      url: https://velog.io/@kwonh/
+      rssUrl: https://v2.velog.io/rss/@kwonh
+      description: 권준혁
       # description 태그가 없기 때문에 현재 불가.
 #    -
 #      url: https://medium.com/daangn
