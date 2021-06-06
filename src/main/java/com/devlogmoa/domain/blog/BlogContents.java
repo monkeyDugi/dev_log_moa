@@ -21,6 +21,7 @@ public class BlogContents {
 
     private Date pubDate;
     private String title;
+    @Column(length = 1000)
     private String pubLink;
 
     public boolean isNewPublish(Date publishedDate, String pubLink) {

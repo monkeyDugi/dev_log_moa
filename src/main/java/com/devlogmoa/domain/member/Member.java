@@ -39,6 +39,10 @@ public class Member {
         return this;
     }
 
+    public boolean isAdmin() {
+        return role == Role.ADMIN;
+    }
+
     public String getRoleKey() {
         return this.role.getKey();
     }

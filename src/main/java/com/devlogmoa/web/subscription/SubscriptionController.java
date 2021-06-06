@@ -26,7 +26,7 @@ public class SubscriptionController {
     private final BlogRepository blogRepository;
 
     @ResponseBody
-    @PostMapping("/api/blog/subscription/{blogId}")
+    @PostMapping("/api/blogs/subscription/{blogId}")
     public void saveSubscription(@PathVariable("blogId") Long blogId, @LoginMember SessionMember member) {
         Member findMember = memberRepository.findByEmail(member.getEmail()).get();
         Blog findBlog = blogRepository.findById(blogId).get();
@@ -36,7 +36,7 @@ public class SubscriptionController {
     }
 
     @ResponseBody
-    @DeleteMapping("/api/blog/subscription/{subscriptionId}")
+    @DeleteMapping("/api/blogs/subscription/{subscriptionId}")
     public void deleteSubscription(@PathVariable("subscriptionId") Long subscriptionId) {
         subscriptionRepository.deleteById(subscriptionId);
     }

@@ -10,14 +10,14 @@ import java.util.Date;
 @Getter @Setter
 public class BlogContentsResponseDto {
 
-    private Long id;
+    private Long blogContentsId;
     private Blog blog;
     private Date pubDate;
     private String title;
     private String pubLink;
 
     public BlogContentsResponseDto(BlogContents entity) {
-        this.id = entity.getId();
+        this.blogContentsId = entity.getId();
         this.blog = entity.getBlog();
         this.pubDate = entity.getPubDate();
         this.title = entity.getTitle();

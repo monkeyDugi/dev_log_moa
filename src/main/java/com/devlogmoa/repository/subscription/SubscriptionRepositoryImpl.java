@@ -2,6 +2,7 @@ package com.devlogmoa.repository.subscription;
 
 import com.devlogmoa.domain.blog.QBlog;
 import com.devlogmoa.domain.blog.QBlogContents;
+import com.devlogmoa.domain.blog.UsageStatus;
 import com.devlogmoa.domain.member.QMember;
 import com.devlogmoa.domain.subscription.QSubscription;
 import com.devlogmoa.web.dto.response.subscription.SubscriptionResponseDto;
@@ -42,6 +43,7 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepositoryCustom 
                 .on(QBlog.blog.id.eq(QBlogContents.blogContents.blog.id))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
+                .where(QBlog.blog.usageStatus.eq(UsageStatus.USE))
                 .orderBy(QBlogContents.blogContents.pubDate.desc())
                 .fetchResults();
 

@@ -22,13 +22,22 @@ public class Blog {
     @Column(nullable = false)
     private String blogTitle;
 
+    @Enumerated(value = EnumType.STRING)
+    @Column(nullable = false)
+    private UsageStatus usageStatus;
+
     public static Blog createBlog(String blogLink, String blogRssLink, String blogTitle) {
         Blog blog = new Blog();
 
         blog.blogLink = blogLink;
         blog.blogRssLink = blogRssLink;
         blog.blogTitle = blogTitle;
+        blog.usageStatus = UsageStatus.USE;
 
         return blog;
+    }
+
+    public void changeStatus(UsageStatus usageStatus) {
+        this.usageStatus = usageStatus;
     }
 }

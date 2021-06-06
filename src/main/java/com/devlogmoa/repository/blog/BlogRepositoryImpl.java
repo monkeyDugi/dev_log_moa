@@ -1,6 +1,7 @@
 package com.devlogmoa.repository.blog;
 
 import com.devlogmoa.domain.blog.QBlog;
+import com.devlogmoa.domain.blog.UsageStatus;
 import com.devlogmoa.domain.member.QMember;
 import com.devlogmoa.domain.subscription.QSubscription;
 import com.devlogmoa.web.dto.response.blog.BlogResponseDto;
@@ -48,6 +49,7 @@ public class BlogRepositoryImpl implements BlogRepositoryCustom {
                         )
                 )
                 .from(blogMain)
+                .where(blogMain.usageStatus.eq(UsageStatus.USE))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetchResults();
