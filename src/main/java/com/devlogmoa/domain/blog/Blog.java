@@ -36,4 +36,8 @@ public class Blog {
 
         return blog;
     }
+
+    public void changeStatus(UsageStatus usageStatus) {
+        this.usageStatus = usageStatus;
+    }
 }
