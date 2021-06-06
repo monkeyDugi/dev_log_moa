@@ -7,5 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SubscriptionRepository extends JpaRepository<Subscription, Long>, SubscriptionRepositoryCustom {
+
+    @Override
     Page<SubscriptionResponseDto> findByMemberEmail(String email, Pageable pageable);
 }

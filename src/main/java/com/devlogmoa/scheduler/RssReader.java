@@ -2,6 +2,7 @@ package com.devlogmoa.scheduler;
 
 import com.devlogmoa.domain.blog.Blog;
 import com.devlogmoa.domain.blog.BlogContents;
+import com.devlogmoa.domain.blog.UsageStatus;
 import com.devlogmoa.repository.blog.BlogContentsRepository;
 import com.devlogmoa.repository.blog.BlogRepository;
 import com.devlogmoa.web.dto.response.rss.RssResponseDto;
@@ -52,10 +53,12 @@ public class RssReader {
     }
 
     private void createBlogContents(Blog blog, List<SyndEntry> entries) {
-        BlogContents findLastBlogContents = blogContentsRepository.findTopByBlogIdOrderByPubDateDesc(blog.getId());
+        if (UsageStatus.isUse(blog.getUsageStatus())) {
+            BlogContents findLastBlogContents = blogContentsRepository.findTopByBlogIdOrderByPubDateDesc(blog.getId());
 
-        for (SyndEntry entry : entries) {
-            mergeBlogDetail(blog, entry, findLastBlogContents);
+            for (SyndEntry entry : entries) {
+                mergeBlogDetail(blog, entry, findLastBlogContents);
+            }
         }
     }
 

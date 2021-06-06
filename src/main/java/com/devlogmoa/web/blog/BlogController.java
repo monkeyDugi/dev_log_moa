@@ -23,9 +23,7 @@ public class BlogController {
 
     @GetMapping("/")
     public String getBLogContents(Model model, @PageableDefault(size = 10) Pageable pageable, @LoginMember SessionMember member) {
-
-        Page<BlogContentsResponseDto> blogContents = blogContentsRepository.findAllByOrderByPubDateDesc(pageable)
-                .map(BlogContentsResponseDto::new);
+        Page<BlogContentsResponseDto> blogContents = blogContentsRepository.findAllByOrderByPubDateDesc(pageable);
 
         model.addAttribute("blogContents", blogContents);
 
