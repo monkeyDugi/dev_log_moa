@@ -26,6 +26,14 @@ public class Blog {
     @Column(nullable = false)
     private UsageStatus usageStatus;
 
+    public void useStatus() {
+        this.usageStatus = UsageStatus.USE;
+    }
+
+    public void unusedStatus() {
+        this.usageStatus = UsageStatus.UNUSED;
+    }
+
     public static Blog createBlog(String blogLink, String blogRssLink, String blogTitle) {
         Blog blog = new Blog();
 
@@ -35,9 +43,5 @@ public class Blog {
         blog.usageStatus = UsageStatus.USE;
 
         return blog;
-    }
-
-    public void changeStatus(UsageStatus usageStatus) {
-        this.usageStatus = usageStatus;
     }
 }

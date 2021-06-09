@@ -25,6 +25,13 @@
                 th:text="${blog.subscriptionId == null} ? '구독하기' : '구독중'">
         </button>
       </td>
+      <td>
+        <div th:style="${member.role.name() == 'ADMIN' ? '' : 'display:none'}">
+          <button th:name="btn-usageStatus" th:id="btn-usageStatus" th:value="${blog.usageStatus}"
+                  th:text="${blog.usageStatus.name() == 'USE'} ? '비활성하기' : '활성하기'">
+          </button>
+        </div>
+      </td>
     </tr>
     </tbody>
   </table>
