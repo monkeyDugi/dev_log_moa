@@ -3,11 +3,13 @@ package com.devlogmoa.repository.blog;
 import com.devlogmoa.domain.blog.QBlog;
 import com.devlogmoa.domain.blog.UsageStatus;
 import com.devlogmoa.domain.member.QMember;
+import com.devlogmoa.domain.member.Role;
 import com.devlogmoa.domain.subscription.QSubscription;
 import com.devlogmoa.web.dto.response.blog.BlogResponseDto;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -20,11 +22,11 @@ public class BlogRepositoryImpl implements BlogRepositoryCustom {
 
     private final JPAQueryFactory queryFactory;
 
-    @Override
-    public Page<BlogResponseDto> findAllBlog(String email, Pageable pageable) {
-        QBlog blogMain = new QBlog("blogMain");
-        QBlog blogSub = new QBlog("blogSub");
+    QBlog blogMain = new QBlog("blogMain");
+    QBlog blogSub = new QBlog("blogSub");
 
+    @Override
+    public Page<BlogResponseDto> findAllBlog(String email, Role role, Pageable pageable) {
         QueryResults<BlogResponseDto> result =
                 queryFactory.select(
                         Projections.constructor(
@@ -33,6 +35,7 @@ public class BlogRepositoryImpl implements BlogRepositoryCustom {
                                 blogMain.blogTitle,
                                 blogMain.blogLink,
                                 blogMain.blogRssLink,
+                                blogMain.usageStatus,
                                 ExpressionUtils.as(
                                         JPAExpressions.select(
                                                 QSubscription.subscription.id
@@ -49,11 +52,19 @@ public class BlogRepositoryImpl implements BlogRepositoryCustom {
                         )
                 )
                 .from(blogMain)
-                .where(blogMain.usageStatus.eq(UsageStatus.USE))
+                .where(eqRole(role))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetchResults();
 
         return new PageImpl<>(result.getResults(), pageable, result.getTotal());
+    }
+
+    private BooleanExpression eqRole(Role role) {
+        if (Role.ADMIN == role) {
+            return null;
+        }
+
+        return blogMain.usageStatus.eq(UsageStatus.USE);
     }
 }

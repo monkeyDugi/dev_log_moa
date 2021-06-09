@@ -8,6 +8,7 @@ import com.devlogmoa.domain.subscription.Subscription;
 import com.devlogmoa.repository.blog.BlogRepository;
 import com.devlogmoa.repository.member.MemberRepository;
 import com.devlogmoa.repository.subscription.SubscriptionRepository;
+import com.devlogmoa.service.subscription.SubscriptionService;
 import com.devlogmoa.web.dto.response.subscription.SubscriptionResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -21,34 +22,28 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class SubscriptionController {
 
-    private final MemberRepository memberRepository;
-    private final SubscriptionRepository subscriptionRepository;
-    private final BlogRepository blogRepository;
+    private final SubscriptionService subscriptionService;
 
     @ResponseBody
     @PostMapping("/api/blogs/subscription/{blogId}")
     public void saveSubscription(@PathVariable("blogId") Long blogId, @LoginMember SessionMember member) {
-        Member findMember = memberRepository.findByEmail(member.getEmail()).get();
-        Blog findBlog = blogRepository.findById(blogId).get();
-
-        Subscription subscription = Subscription.Subscribe(findBlog, findMember);
-        subscriptionRepository.save(subscription);
+        subscriptionService.saveSubscription(blogId, member);
     }
 
     @ResponseBody
     @DeleteMapping("/api/blogs/subscription/{subscriptionId}")
     public void deleteSubscription(@PathVariable("subscriptionId") Long subscriptionId) {
-        subscriptionRepository.deleteById(subscriptionId);
+        subscriptionService.deleteSubscription(subscriptionId);
     }
 
     @GetMapping("/blogs/Contents/subscriptions")
-    public String getSubscription(Model model, @PageableDefault(size = 10) Pageable pageable, @LoginMember SessionMember member) {
-        Page<SubscriptionResponseDto> subscriptions = subscriptionRepository.findByMemberEmail("lbd4946@gmail.com", pageable);
+    public String findSubscriptions(Model model, @LoginMember SessionMember member, @PageableDefault(size = 10) Pageable pageable) {
+        Page<SubscriptionResponseDto> subscriptions = subscriptionService.findSubscriptions(member, pageable);
 
         model.addAttribute("subscriptions", subscriptions);
 
         if (member != null) {
-            model.addAttribute("memberName", member);
+            model.addAttribute("member", member);
         }
 
         return "subscriptions";
