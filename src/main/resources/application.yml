@@ -29,3 +29,7 @@ logging:
     org.hibernate.SQL: debug # 로거로 찍기 때문에 사용하자.
     org.hibernate.type: trace # query parameter 보여줌.
     com.devson.pagination: debug # 페이징 로그
+
+## 스케줄러 시간
+cron:
+  expression: 0 * * ? * *
