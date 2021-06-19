@@ -1,12 +1,13 @@
 package com.devlogmoa.domain.blog;
 
+import com.devlogmoa.domain.BaseTimeEntity;
 import lombok.Getter;
 
 import javax.persistence.*;
 
 @Getter
 @Entity
-public class Blog {
+public class Blog extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

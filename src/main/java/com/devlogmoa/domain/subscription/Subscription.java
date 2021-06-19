@@ -1,5 +1,6 @@
 package com.devlogmoa.domain.subscription;
 
+import com.devlogmoa.domain.BaseTimeEntity;
 import com.devlogmoa.domain.blog.Blog;
 import com.devlogmoa.domain.member.Member;
 import lombok.Getter;
@@ -8,7 +9,7 @@ import javax.persistence.*;
 
 @Getter
 @Entity
-public class Subscription {
+public class Subscription extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
