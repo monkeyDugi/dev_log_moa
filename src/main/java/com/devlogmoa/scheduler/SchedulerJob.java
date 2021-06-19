@@ -25,7 +25,7 @@ public class SchedulerJob implements Job {
         List<BlogPropertiesDto> blogUrls = blogProperties.getList();
 
         for (BlogPropertiesDto blogUrl : blogUrls) {
-            rssReader.createRssData(blogUrl.getRssUrl());
+            rssReader.createRssData(blogUrl.getUrl(), blogUrl.getRssUrl());
         }
     }
 }
