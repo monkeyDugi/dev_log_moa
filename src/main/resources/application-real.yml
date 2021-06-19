@@ -5,3 +5,7 @@ spring:
   jpa:
     properties:
       dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+## 스케줄러 시간
+cron:
+  expression: 0 0 6 1/1 * ? *
