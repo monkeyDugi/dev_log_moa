@@ -27,14 +27,13 @@ public class RssReader {
     private final BlogContentsRepository blogContentsRepository;
 
     @Transactional
-    public void createRssData(String rssUrl) throws IOException, FeedException {
+    public void createRssData(String url, String rssUrl) throws IOException, FeedException {
         SyndFeed feed = new SyndFeedInput().build(new XmlReader(new URL(rssUrl)));
         List<SyndEntry> entries = feed.getEntries();
 
-        String blogLink = feed.getLink();
         String blogTitle = feed.getTitle();
 
-        Blog blog = createBlog(blogLink, rssUrl, blogTitle);
+        Blog blog = createBlog(url, rssUrl, blogTitle);
         createBlogContents(blog, entries);
     }
 
@@ -57,25 +56,24 @@ public class RssReader {
             BlogContents findLastBlogContents = blogContentsRepository.findTopByBlogIdOrderByPubDateDesc(blog.getId());
 
             for (SyndEntry entry : entries) {
-                mergeBlogDetail(blog, entry, findLastBlogContents);
+                mergeBlogContents(blog, entry, findLastBlogContents);
             }
         }
     }
 
-    private void mergeBlogDetail(Blog blog, SyndEntry entry, BlogContents findLastBlogDetail) {
-
-        if (findLastBlogDetail == null || findLastBlogDetail.isNewPublish(entry.getPublishedDate(), entry.getLink())) {
+    private void mergeBlogContents(Blog blog, SyndEntry entry, BlogContents findLastBlogContents) {
+        if (findLastBlogContents == null || findLastBlogContents.isNewPublish(entry.getPublishedDate(), entry.getLink())) {
             BlogContents blogDetail = BlogContents.createPublish(RssResponseDto.newRss(entry, blog));
 
             blogContentsRepository.save(blogDetail);
         } else {
-            updatePublish(findLastBlogDetail, entry);
+            updatePublish(findLastBlogContents, entry);
         }
     }
 
-    private void updatePublish(BlogContents findLastBlogDetail, SyndEntry entry) {
-        if (findLastBlogDetail.getPubLink().equals(entry.getLink())) {
-            findLastBlogDetail.updatePublish(RssResponseDto.existNewRss(entry));
+    private void updatePublish(BlogContents findLastBlogContents, SyndEntry entry) {
+        if (findLastBlogContents.getPubLink().equals(entry.getLink())) {
+            findLastBlogContents.updatePublish(RssResponseDto.existNewRss(entry));
         }
     }
 }
