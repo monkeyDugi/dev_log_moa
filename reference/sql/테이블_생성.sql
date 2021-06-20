@@ -3,15 +3,16 @@ create table blog (
                       blog_link varchar(255) not null,
                       blog_rss_link varchar(255) not null,
                       blog_title varchar(255) not null,
+                      usage_status varchar(10) not null default 'USE',
                       primary key (blog_id)
 );
 
 create table blog_contents (
                                blog_contents_id bigint auto_increment,
-                               pub_date timestamp,
-                               pub_link varchar(255),
-                               title varchar(255),
-                               blog_id bigint,
+                               pub_date timestamp not null,
+                               pub_link varchar(1000) not null,
+                               title varchar(255) not null,
+                               blog_id bigint not null,
                                primary key (blog_contents_id)
 );
 
@@ -25,8 +26,8 @@ create table member (
 
 create table subscription (
                               subscription_id bigint auto_increment,
-                              blog_id bigint,
-                              member_id bigint,
+                              blog_id bigint not null,
+                              member_id bigint not null,
                               primary key (subscription_id)
 );
 
@@ -35,6 +36,9 @@ alter table blog
 
 alter table blog
     add constraint uk_blog_rss_link unique (blog_rss_link);
+
+alter table member
+    add constraint uk_email unique (email);
 
 alter table member
     add constraint uk_email unique (email);

@@ -1,6 +1,5 @@
 package com.devlogmoa.service.subscription;
 
-import com.devlogmoa.config.auth.LoginMember;
 import com.devlogmoa.config.auth.dto.SessionMember;
 import com.devlogmoa.domain.blog.Blog;
 import com.devlogmoa.domain.member.Member;
@@ -12,11 +11,8 @@ import com.devlogmoa.web.dto.response.subscription.SubscriptionResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @RequiredArgsConstructor
 @Transactional

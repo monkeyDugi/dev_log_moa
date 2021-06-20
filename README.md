@@ -36,21 +36,18 @@ awesome-devblog는 내가 구독하여 볼 수 있는 기능이 아쉬웠다.
         DB에 적재한다.
 -   언제 작성된 내용인지 보여준다.
 -   모든 블로그 기준 최신순으로 보여준다.
--   페이지당 20개 씩 보여준다.
+-   페이지당 10개 씩 보여준다.
 
 ### 비로그인 사용자
--   오직 읽기만 가능하다.
+-   오직 블로그 게시글 읽기만 가능
 
 ### 로그인 사용자
 -   구독이 가능하다. 해지도 가능
     구독을 하면 개인 페이지에서 구독 목록을 추려 보여준다.
--   카카오, 구글 로그인
+-   구글 로그인
 
 ### 관리자
--   블로그 추가, 삭제 가능  
-    블로그 내용은 rss를 그대로 가져오는 것이므로 수정할 내용이 없다.
--   관리 페이지에서 체크 박스로 삭제
--   관리 페이지에서 등록 버튼으로 등록
+-   블로그 삭제 기능
 
 ## 프로그래밍 규칙
 
@@ -105,3 +102,6 @@ awesome-devblog는 내가 구독하여 볼 수 있는 기능이 아쉬웠다.
 - [naver conding convention](https://naver.github.io/hackday-conventions-java/)
 - [rest api](https://meetup.toast.com/posts/92)
 
+## ERD
+- [ERD 링크](https://aquerytool.com:443/aquerymain/index/?rurl=6db53adb-a965-4fbc-b355-78db1561b21c)  
+  비밀번호 : u4dn5b

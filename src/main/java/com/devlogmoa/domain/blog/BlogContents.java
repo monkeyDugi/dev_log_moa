@@ -1,5 +1,6 @@
 package com.devlogmoa.domain.blog;
 
+import com.devlogmoa.domain.BaseTimeEntity;
 import com.devlogmoa.web.dto.response.rss.RssResponseDto;
 import lombok.Getter;
 
@@ -8,7 +9,7 @@ import java.util.Date;
 
 @Getter
 @Entity
-public class BlogContents {
+public class BlogContents extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

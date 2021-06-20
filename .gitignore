@@ -4,3 +4,4 @@ HELP.md
 build
 out
 src/main/generated/
+application-oauth.properties
