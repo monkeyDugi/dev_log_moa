@@ -35,5 +35,8 @@ JAR_NAME=$(ls -tr $REPOSITORY/ | grep .jar | tail -n 1)
 echo "> JAR Name: $JAR_NAME"
 nohup java -jar \
         -Dspring.config.location=classpath:/application-blog.yml,/home/ec2-user/app/application-real-db.yml \
-        -Dspring.config.activate.on-profile=real \
+        # 2.4부터 아래 코드를 지향하는데 가끔 버그가 있다. 일단 지양하는게 좋겠다.
+#        -Dspring.config.activate.on-profile=real
+        # 2.4부터 지양하는 코드이지만 위 코드가 버그가 있는 것으로 판단되어 일단 지향하자.
+        -Dspring.profiles.active=real
         $REPOSITORY/$JAR_NAME 2>&1 &
