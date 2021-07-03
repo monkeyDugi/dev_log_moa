@@ -4,4 +4,4 @@ HELP.md
 build
 out
 src/main/generated/
-application-oauth.yml
+src/*/application-oauth.yml
