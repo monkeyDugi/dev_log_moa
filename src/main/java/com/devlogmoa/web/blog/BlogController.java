@@ -6,6 +6,7 @@ import com.devlogmoa.domain.member.Role;
 import com.devlogmoa.service.blog.BlogService;
 import com.devlogmoa.web.dto.response.blog.BlogContentsResponseDto;
 import com.devlogmoa.web.dto.response.blog.BlogResponseDto;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -50,6 +51,7 @@ public class BlogController {
         return "blogs";
     }
 
+    @ApiOperation(value = "관리자가 블로그 활성화")
     @PutMapping("/api/admin/blogs/{blogId}/useStatus")
     public ResponseEntity<String> updateUseStatus(@PathVariable("blogId") Long blogId, @LoginMember SessionMember member) {
         if (member.getRole() != Role.ADMIN) {
@@ -61,6 +63,7 @@ public class BlogController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @ApiOperation(value = "관리자가 블로그 비활성화")
     @PutMapping("/api/admin/blogs/{blogId}/unusedStatus")
     public ResponseEntity<String> updateUnusedStatus(@PathVariable("blogId") Long blogId, @LoginMember SessionMember member) {
         if (member.getRole() != Role.ADMIN) {

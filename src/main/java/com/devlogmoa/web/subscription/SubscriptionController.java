@@ -2,12 +2,6 @@ package com.devlogmoa.web.subscription;
 
 import com.devlogmoa.config.auth.LoginMember;
 import com.devlogmoa.config.auth.dto.SessionMember;
-import com.devlogmoa.domain.blog.Blog;
-import com.devlogmoa.domain.member.Member;
-import com.devlogmoa.domain.subscription.Subscription;
-import com.devlogmoa.repository.blog.BlogRepository;
-import com.devlogmoa.repository.member.MemberRepository;
-import com.devlogmoa.repository.subscription.SubscriptionRepository;
 import com.devlogmoa.service.subscription.SubscriptionService;
 import com.devlogmoa.web.dto.response.subscription.SubscriptionResponseDto;
 import lombok.RequiredArgsConstructor;
