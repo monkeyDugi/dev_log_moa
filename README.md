@@ -1,6 +1,7 @@
 [아이디어 제공](https://awesome-devblog.netlify.app/)  
 **국내 개발 블로그의 정보를 한 곳에 모아서 보여주는 사이트를 만든다.**
 
+[서비스 사이트 링크](http://www.devlogmoa.shop/)
 ## 만들게 된 이유
 
 ---
