@@ -4,6 +4,7 @@ import com.devlogmoa.config.auth.LoginMember;
 import com.devlogmoa.config.auth.dto.SessionMember;
 import com.devlogmoa.service.subscription.SubscriptionService;
 import com.devlogmoa.web.dto.response.subscription.SubscriptionResponseDto;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,12 +19,14 @@ public class SubscriptionController {
 
     private final SubscriptionService subscriptionService;
 
+    @ApiOperation(value = "블로그 구독하기")
     @ResponseBody
     @PostMapping("/api/blogs/subscription/{blogId}")
     public void saveSubscription(@PathVariable("blogId") Long blogId, @LoginMember SessionMember member) {
         subscriptionService.saveSubscription(blogId, member);
     }
 
+    @ApiOperation(value = "블로그 구독 취소")
     @ResponseBody
     @DeleteMapping("/api/blogs/subscription/{subscriptionId}")
     public void deleteSubscription(@PathVariable("subscriptionId") Long subscriptionId) {

@@ -51,7 +51,8 @@ public class BlogController {
         return "blogs";
     }
 
-    @ApiOperation(value = "관리자가 블로그 활성화")
+
+
     @PutMapping("/api/admin/blogs/{blogId}/useStatus")
     public ResponseEntity<String> updateUseStatus(@PathVariable("blogId") Long blogId, @LoginMember SessionMember member) {
         if (member.getRole() != Role.ADMIN) {
