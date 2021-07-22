@@ -26,6 +26,8 @@ public class RssReader {
     private final BlogRepository blogRepository;
     private final BlogContentsRepository blogContentsRepository;
 
+    public static boolean newRssStatus = false;
+
     @Transactional
     public void createRssData(String url, String rssUrl) throws IOException, FeedException {
         SyndFeed feed = new SyndFeedInput().build(new XmlReader(new URL(rssUrl)));
@@ -66,6 +68,10 @@ public class RssReader {
             BlogContents blogDetail = BlogContents.createPublish(RssResponseDto.newRss(entry, blog));
 
             blogContentsRepository.save(blogDetail);
+
+            if (!newRssStatus) {
+                newRssStatus = true;
+            }
         } else {
             updatePublish(findLastBlogContents, entry);
         }
