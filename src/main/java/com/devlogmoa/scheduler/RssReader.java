@@ -2,6 +2,7 @@ package com.devlogmoa.scheduler;
 
 import com.devlogmoa.domain.blog.Blog;
 import com.devlogmoa.domain.blog.BlogContents;
+import com.devlogmoa.domain.blog.ContentsStatus;
 import com.devlogmoa.domain.blog.UsageStatus;
 import com.devlogmoa.repository.blog.BlogContentsRepository;
 import com.devlogmoa.repository.blog.BlogRepository;
@@ -25,6 +26,8 @@ public class RssReader {
 
     private final BlogRepository blogRepository;
     private final BlogContentsRepository blogContentsRepository;
+
+    public static ContentsStatus contentsStatus = ContentsStatus.DEFAULT;
 
     @Transactional
     public void createRssData(String url, String rssUrl) throws IOException, FeedException {
@@ -56,24 +59,17 @@ public class RssReader {
             BlogContents findLastBlogContents = blogContentsRepository.findTopByBlogIdOrderByPubDateDesc(blog.getId());
 
             for (SyndEntry entry : entries) {
-                mergeBlogContents(blog, entry, findLastBlogContents);
+                createBlogContents(blog, entry, findLastBlogContents);
             }
         }
     }
 
-    private void mergeBlogContents(Blog blog, SyndEntry entry, BlogContents findLastBlogContents) {
+    private void createBlogContents(Blog blog, SyndEntry entry, BlogContents findLastBlogContents) {
         if (findLastBlogContents == null || findLastBlogContents.isNewPublish(entry.getPublishedDate(), entry.getLink())) {
             BlogContents blogDetail = BlogContents.createPublish(RssResponseDto.newRss(entry, blog));
-
             blogContentsRepository.save(blogDetail);
-        } else {
-            updatePublish(findLastBlogContents, entry);
-        }
-    }
 
-    private void updatePublish(BlogContents findLastBlogContents, SyndEntry entry) {
-        if (findLastBlogContents.getPubLink().equals(entry.getLink())) {
-            findLastBlogContents.updatePublish(RssResponseDto.existNewRss(entry));
+            contentsStatus = ContentsStatus.NEW;
         }
     }
 }

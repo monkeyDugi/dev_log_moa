@@ -2,6 +2,7 @@ package com.devlogmoa.scheduler;
 
 import com.devlogmoa.config.blog.BlogProperties;
 import com.devlogmoa.config.blog.BlogPropertiesDto;
+import com.devlogmoa.mail.MailService;
 import com.devlogmoa.util.CustomBeanUtil;
 import lombok.SneakyThrows;
 import org.quartz.Job;
@@ -22,10 +23,13 @@ public class SchedulerJob implements Job {
     public void execute(JobExecutionContext context) throws JobExecutionException {
         RssReader rssReader = (RssReader) CustomBeanUtil.getBean("rssReader");
         BlogProperties blogProperties = (BlogProperties) CustomBeanUtil.getBean("blogProperties");
+        MailService mailService = (MailService) CustomBeanUtil.getBean("mailService");
         List<BlogPropertiesDto> blogUrls = blogProperties.getList();
 
         for (BlogPropertiesDto blogUrl : blogUrls) {
             rssReader.createRssData(blogUrl.getUrl(), blogUrl.getRssUrl());
         }
+
+        mailService.sendEmail();
     }
 }

@@ -29,13 +29,4 @@ public class RssResponseDto {
 
         return rssResponseDto;
     }
-
-    public static RssResponseDto existNewRss(SyndEntry entry) {
-        RssResponseDto rssResponseDto = new RssResponseDto();
-
-        rssResponseDto.pubDate = entry.getPublishedDate();
-        rssResponseDto.title = entry.getTitle();
-
-        return rssResponseDto;
-    }
 }

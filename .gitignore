@@ -5,3 +5,4 @@ build
 out
 src/main/generated/
 src/*/application-oauth.yml
+JavaMailConfig.java
