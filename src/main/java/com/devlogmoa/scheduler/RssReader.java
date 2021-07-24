@@ -58,12 +58,12 @@ public class RssReader {
             BlogContents findLastBlogContents = blogContentsRepository.findTopByBlogIdOrderByPubDateDesc(blog.getId());
 
             for (SyndEntry entry : entries) {
-                mergeBlogContents(blog, entry, findLastBlogContents);
+                createBlogContents(blog, entry, findLastBlogContents);
             }
         }
     }
 
-    private void mergeBlogContents(Blog blog, SyndEntry entry, BlogContents findLastBlogContents) {
+    private void createBlogContents(Blog blog, SyndEntry entry, BlogContents findLastBlogContents) {
         if (findLastBlogContents == null || findLastBlogContents.isNewPublish(entry.getPublishedDate(), entry.getLink())) {
             BlogContents blogDetail = BlogContents.createPublish(RssResponseDto.newRss(entry, blog));
 
@@ -72,14 +72,6 @@ public class RssReader {
             if (!newRssStatus) {
                 newRssStatus = true;
             }
-        } else {
-            updatePublish(findLastBlogContents, entry);
-        }
-    }
-
-    private void updatePublish(BlogContents findLastBlogContents, SyndEntry entry) {
-        if (findLastBlogContents.getPubLink().equals(entry.getLink())) {
-            findLastBlogContents.updatePublish(RssResponseDto.existNewRss(entry));
         }
     }
 }

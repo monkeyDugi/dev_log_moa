@@ -4,7 +4,14 @@ import com.devlogmoa.domain.BaseTimeEntity;
 import com.devlogmoa.web.dto.response.rss.RssResponseDto;
 import lombok.Getter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.util.Date;
 
 @Getter
@@ -31,11 +38,6 @@ public class BlogContents extends BaseTimeEntity {
         }
 
         return pubDate.compareTo(publishedDate) < 0 && !this.pubLink.equals(pubLink);
-    }
-
-    public void updatePublish(RssResponseDto rssResponseDto) {
-        this.pubDate = rssResponseDto.getPubDate();
-        this.title = rssResponseDto.getTitle();
     }
 
     public static BlogContents createPublish(RssResponseDto rssResponseDto) {
