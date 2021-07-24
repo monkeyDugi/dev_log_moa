@@ -1,0 +1,7 @@
+spring:
+  config:
+    import: application-real-db.yml,application-blog.yml,application-cronExpression.yml
+
+  jpa:
+    properties:
+      dialect: org.hibernate.dialect.MySQL5InnoDBDialect

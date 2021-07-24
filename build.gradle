@@ -1,0 +1,91 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.5'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	//querydsl 추가
+	id 'com.ewerk.gradle.plugins.querydsl' version "1.0.10"
+	id 'java'
+}
+
+// querydsl 적용
+def querydslSrcDir = 'src/main/generated' // QClass 생성 위치
+
+querydsl {
+	jpa = true
+	querydslSourcesDir = querydslSrcDir
+}
+
+sourceSets {
+	main.java.srcDirs querydslSrcDir
+}
+
+configurations {
+	querydsl.extendsFrom compileClasspath
+}
+
+compileQuerydsl{
+	options.annotationProcessorPath = configurations.querydsl
+}
+
+group = 'com.devlogmoa'
+version = '1.0.0-SNAPSHOT-' + new Date().format("yyyyMMddHHmmss")
+sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+	implementation 'org.springframework.boot:spring-boot-starter-quartz'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	runtimeOnly 'com.h2database:h2'
+
+	compile 'org.mariadb.jdbc:mariadb-java-client'
+
+	// rss reader
+	// https://mvnrepository.com/artifact/rome/rome
+	implementation group: 'rome', name: 'rome', version: '1.0'
+
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	// 소셜 로그인 의존성
+	compile('org.springframework.boot:spring-boot-starter-oauth2-client')
+
+	// DB를 세션 저장소로 사용하기 위한 의존성
+	implementation 'org.springframework.session:spring-session-jdbc'
+
+	// https://mvnrepository.com/artifact/com.querydsl/querydsl-jpa
+	implementation 'com.querydsl:querydsl-jpa'
+	// https://mvnrepository.com/artifact/com.querydsl/querydsl-apt
+	implementation 'com.querydsl:querydsl-apt'
+
+	// https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
+	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+	// https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
+	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+
+
+
+
+	// @ConfigurationProperties
+	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+	useJUnitPlatform()
+}

@@ -1,0 +1,31 @@
+spring:
+  config:
+    import: application-blog.yml,application-oauth.yml,application-cronExpression.yml
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/devlogmoa
+#    url: jdbc:h2:~/devlogmoa
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        #        show_sql: true # System.out으로 찍기 때문에 쓰지 말자.
+        format_sql: true
+      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+## 세션 저장소로 jdbc 사용
+  session:
+    store-type: jdbc
+    timeout: 1000
+    jdbc:
+      table-name: SPRING_SESSION
+      initialize-schema: always
+logging:
+  level:
+    org.hibernate.SQL: debug # 로거로 찍기 때문에 사용하자.
+    org.hibernate.type: trace # query parameter 보여줌.
+    com.devson.pagination: debug # 페이징 로그
