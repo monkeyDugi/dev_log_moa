@@ -1,9 +1,0 @@
-cron:
-  expression: 0 * * ? * *
----
-spring:
-  config:
-    activate:
-      on-profile: real
-cron:
-  expression: 0 0 6 1/1 * ? *
