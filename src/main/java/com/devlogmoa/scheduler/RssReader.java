@@ -2,6 +2,7 @@ package com.devlogmoa.scheduler;
 
 import com.devlogmoa.domain.blog.Blog;
 import com.devlogmoa.domain.blog.BlogContents;
+import com.devlogmoa.domain.blog.ContentsStatus;
 import com.devlogmoa.domain.blog.UsageStatus;
 import com.devlogmoa.repository.blog.BlogContentsRepository;
 import com.devlogmoa.repository.blog.BlogRepository;
@@ -26,7 +27,7 @@ public class RssReader {
     private final BlogRepository blogRepository;
     private final BlogContentsRepository blogContentsRepository;
 
-    public static boolean newRssStatus = false;
+    public static ContentsStatus contentsStatus = ContentsStatus.DEFAULT;
 
     @Transactional
     public void createRssData(String url, String rssUrl) throws IOException, FeedException {
@@ -66,12 +67,9 @@ public class RssReader {
     private void createBlogContents(Blog blog, SyndEntry entry, BlogContents findLastBlogContents) {
         if (findLastBlogContents == null || findLastBlogContents.isNewPublish(entry.getPublishedDate(), entry.getLink())) {
             BlogContents blogDetail = BlogContents.createPublish(RssResponseDto.newRss(entry, blog));
-
             blogContentsRepository.save(blogDetail);
 
-            if (!newRssStatus) {
-                newRssStatus = true;
-            }
+            contentsStatus = ContentsStatus.NEW;
         }
     }
 }

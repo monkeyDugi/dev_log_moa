@@ -1,5 +1,6 @@
 package com.devlogmoa.mail;
 
+import com.devlogmoa.domain.blog.ContentsStatus;
 import com.devlogmoa.domain.member.Member;
 import com.devlogmoa.repository.member.MemberRepository;
 import com.devlogmoa.scheduler.RssReader;
@@ -18,7 +19,7 @@ public class MailService {
     private final MemberRepository memberRepository;
 
     public void sendEmail() {
-        if (RssReader.newRssStatus) {
+        if (ContentsStatus.NEW == RssReader.contentsStatus) {
             List<Member> findMembers = memberRepository.findAll();
             SimpleMailMessage message = new SimpleMailMessage();
 
@@ -31,6 +32,6 @@ public class MailService {
             }
         }
 
-        RssReader.newRssStatus = false;
+        RssReader.contentsStatus = ContentsStatus.DEFAULT;
     }
 }
