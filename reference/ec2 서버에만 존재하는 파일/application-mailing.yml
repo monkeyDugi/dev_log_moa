@@ -1,0 +1,4 @@
+# 발신자 구글 메일 정보
+sender-mail:
+  id: [메일]
+  password: [메일 비밀번호]
