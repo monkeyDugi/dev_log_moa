@@ -107,3 +107,34 @@ awesome-devblog는 내가 구독하여 볼 수 있는 기능이 아쉬웠다.
 ## ERD
 - [ERD 링크](https://aquerytool.com:443/aquerymain/index/?rurl=6db53adb-a965-4fbc-b355-78db1561b21c)  
   비밀번호 : u4dn5b
+  
+## 의문
+- [ ] @LoginMember 가 어떻게 가능한걸까?
+- [ ] BaseEntity의 원리
+- [ ] DB에 로그인 세션 자장하는 원리
+- [ ] 메인화면의 url은 /blog, / 중 어떤게 좋을까?
+- [ ] rebase와 reset 차이
+- [ ] 동시에 http 요청이 들어오면??
+- [ ] 블로그 글 보여주는 목록이 보기 좋지 않다. 그냥 무작정 다 뿌려주기 때문인데.. 어떻게 바꿀까?
+- [ ] 메일 수신 여부 컨트롤을 위해 세션값을 강제로 바꾸어 주고 있는데, 이는 세션 값에 대한 착오를 일으킬 수도 있다.  
+      어떻게 바꿀 수 있을지 고민 필요. 구독만 알림 하도록 개선할 때 고민 해보자.
+- [ ] 직렬화, 역직렬화, 병렬화 -> Serializable
+  문제점 1. SessionMember에 Serializable가 왜 필요한가?
+  문제점 2. SessionMember에서 mailReceiptStatus가 
+  java.io.InvalidClassException: com.devlogmoa.config.auth.dto.SessionMember; local class incompatible: stream classdesc serialVersionUID = -8498973270536986012, local class serialVersionUID = -1124684850244601429
+  -> 해결볍은 UID를 직접 생성하여 클래스 내용이 바뀌어도 버전이 자동생된 값으로 변경되지 않도록 사용.
+     이는 java api 중 serialver.exe를 실행하면 자동으로 해당 클래스에 
+  `private static final long serialVersionUID = -1124684850244601429L;` 와 같이 생성을 해준다.
+  해당 프로젝트에 들어가서 serialver 클래스명 명령어를 치면 됨.
+  갑자기 UID 없어도 잘되네?? 분명 메인화면 접속도 안됐는데..
+  내 생각에는 에러가 발생했던 이유는 어떤 행위로 인해 SessionMember 직렬화가 되었고,
+  나의 모든 컨트롤러는 SessionMember를 사용하기 때문에 클래스가 변경되어 그런 것 같다.
+  근데 서버 재시작하면 다시 초기화 되어야 하는데 뭘까? 이전 SessionMember의 UID가 어딘가 남아있었나?
+  
+Member를 그대로 세션에 저장하지 않고, SessionMember Dto를 따로 만들어서 직렬화하였다.  
+일단 세션은 네트워크이다. 즉, 직렬화가 필요하다. 그래서 Member에 직렬화를 하지 않고 세션에 저장하면
+java.lang.IllegalArgumentException: DefaultSerializer requires a Serializable payload but received an object of type [com.devlogmoa.config.auth.dto.SessionMember]
+이런 에러가 발생한다. 직렬화가 필수적이라는 것이다.
+그렇다면 Member를 왜 직렬화하면 안되는가?
+엔티티는 언제든 변경될 가능성이 있기 때문에 변경이 되면 세션에 있는 UID와 다른 UID를 가지기 때문에 역직렬화가 되지 않는다.
+  

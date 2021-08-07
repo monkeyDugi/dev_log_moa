@@ -4,6 +4,7 @@ const blogs = {
 
         let btnSubscriptions = document.getElementsByName('btn-subscription')
         let blogIds = document.getElementsByName('blogId')
+        let chkMailReceiptStatus = document.getElementById('chk-mail-receipt-status')
 
         if (btnSubscriptions != null) {
             let index = 0
@@ -27,8 +28,23 @@ const blogs = {
                 index++
             }
         }
+
+        // 메일 알림 여부
+        if (chkMailReceiptStatus != null) {
+            chkMailReceiptStatus.addEventListener('click', function () {
+                let checked = chkMailReceiptStatus.getAttribute('checked')
+                if (checked === 'checked') {
+                    chkMailReceiptStatus.setAttribute('checked', 'unchecked')
+                } else {
+                    chkMailReceiptStatus.setAttribute('checked', 'checked')
+                }
+
+                _this.updateMailReceiptStatus(checked);
+            });
+        }
+
         // 블로그 활성 이벤트
-        let btnUsageStatuses = document.getElementsByName('btn-usageStatus')
+        let btnUsageStatuses = document.getElementsByName('btn-usageStatus');
 
         let index = 0
         for (const btnUsageStatus of btnUsageStatuses) {
@@ -94,6 +110,23 @@ const blogs = {
                 alert(JSON.stringify(error))
             })
         }
+    },
+    updateMailReceiptStatus: function (checked) {
+        let param = ''
+
+        if (checked === 'checked') {
+            param = 'N'
+        } else {
+            param = 'Y'
+        }
+        $.ajax({
+            type: 'PUT',
+            url: 'api/blog/mailReceiptStatus/' + param,
+        }).done(function () {
+
+        }).fail(function (error) {
+            alert(JSON.stringify(error))
+        })
     }
 };
 

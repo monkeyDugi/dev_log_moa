@@ -1,12 +1,11 @@
 package com.devlogmoa.service.blog;
 
-import com.devlogmoa.config.auth.LoginMember;
 import com.devlogmoa.config.auth.dto.SessionMember;
 import com.devlogmoa.domain.blog.Blog;
-import com.devlogmoa.domain.blog.UsageStatus;
-import com.devlogmoa.domain.member.Role;
+import com.devlogmoa.domain.member.Member;
 import com.devlogmoa.repository.blog.BlogContentsRepository;
 import com.devlogmoa.repository.blog.BlogRepository;
+import com.devlogmoa.repository.member.MemberRepository;
 import com.devlogmoa.web.dto.response.blog.BlogContentsResponseDto;
 import com.devlogmoa.web.dto.response.blog.BlogResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +21,7 @@ public class BlogService {
 
     private final BlogContentsRepository blogContentsRepository;
     private final BlogRepository blogRepository;
+    private final MemberRepository memberRepository;
 
     public Page<BlogContentsResponseDto> findAllByOrderByPubDateDesc(Pageable pageable) {
         return blogContentsRepository.findAllByOrderByPubDateDesc(pageable);
@@ -41,5 +41,11 @@ public class BlogService {
     public void updateUnusedStatus(Long blogId) {
         Blog blog = blogRepository.findById(blogId).get();
         blog.unusedStatus();
+    }
+
+    @Transactional
+    public void updateMailReceiptStatus(String mailReceiptStatus, SessionMember member) {
+        Member findMember = memberRepository.findByEmail(member.getEmail()).get();
+        findMember.updateMailReceiptStatus(mailReceiptStatus);
     }
 }
