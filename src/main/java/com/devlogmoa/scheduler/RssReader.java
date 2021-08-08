@@ -6,6 +6,7 @@ import com.devlogmoa.domain.blog.ContentsStatus;
 import com.devlogmoa.domain.blog.UsageStatus;
 import com.devlogmoa.repository.blog.BlogContentsRepository;
 import com.devlogmoa.repository.blog.BlogRepository;
+import com.devlogmoa.util.CustomDateUtils;
 import com.devlogmoa.web.dto.response.rss.RssResponseDto;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
@@ -65,7 +66,7 @@ public class RssReader {
     }
 
     private void createBlogContents(Blog blog, SyndEntry entry, BlogContents findLastBlogContents) {
-        if (findLastBlogContents == null || findLastBlogContents.isNewPublish(entry.getPublishedDate(), entry.getLink())) {
+        if (findLastBlogContents == null || findLastBlogContents.isNewPublish(CustomDateUtils.parseLocalDate(entry.getPublishedDate()), entry.getLink())) {
             BlogContents blogDetail = BlogContents.createPublish(RssResponseDto.newRss(entry, blog));
             blogContentsRepository.save(blogDetail);
 

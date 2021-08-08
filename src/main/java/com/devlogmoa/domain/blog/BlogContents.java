@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -27,12 +28,12 @@ public class BlogContents extends BaseTimeEntity {
     @JoinColumn(name = "blog_id")
     private Blog blog;
 
-    private Date pubDate;
+    private LocalDate pubDate;
     private String title;
     @Column(length = 1000)
     private String pubLink;
 
-    public boolean isNewPublish(Date publishedDate, String pubLink) {
+    public boolean isNewPublish(LocalDate publishedDate, String pubLink) {
         if (pubDate == null) {
             return false;
         }

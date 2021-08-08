@@ -12,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
+import java.time.LocalDate;
+
 @RequiredArgsConstructor
 public class BlogContentsRepositoryImpl implements BlogContentsRepositoryCustom {
 
@@ -31,6 +33,7 @@ public class BlogContentsRepositoryImpl implements BlogContentsRepositoryCustom 
                 .innerJoin(QBlog.blog)
                 .on(QBlog.blog.eq(QBlogContents.blogContents.blog))
                 .where(QBlog.blog.usageStatus.eq(UsageStatus.USE))
+                .where(QBlogContents.blogContents.pubDate.gt(LocalDate.now().minusDays(8)))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .orderBy(QBlogContents.blogContents.pubDate.desc())
