@@ -14,6 +14,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
+import java.time.LocalDate;
+
 @RequiredArgsConstructor
 public class SubscriptionRepositoryImpl implements SubscriptionRepositoryCustom {
 
@@ -44,6 +46,7 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepositoryCustom 
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .where(QBlog.blog.usageStatus.eq(UsageStatus.USE))
+                .where(QBlogContents.blogContents.pubDate.gt(LocalDate.now().minusDays(8)))
                 .orderBy(QBlogContents.blogContents.pubDate.desc())
                 .fetchResults();
 

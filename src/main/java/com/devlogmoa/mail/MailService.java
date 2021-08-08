@@ -1,6 +1,7 @@
 package com.devlogmoa.mail;
 
 import com.devlogmoa.domain.blog.ContentsStatus;
+import com.devlogmoa.domain.member.MailReceiptStatus;
 import com.devlogmoa.domain.member.Member;
 import com.devlogmoa.repository.member.MemberRepository;
 import com.devlogmoa.scheduler.RssReader;
@@ -24,14 +25,20 @@ public class MailService {
             SimpleMailMessage message = new SimpleMailMessage();
 
             for (Member findMember : findMembers) {
-                message.setTo(findMember.getEmail());
-                message.setSubject("devlogmoa");
-                message.setText("devlogmoa에서 새로운 소식이 올라왔어요!! 확인하세요!! http://www.devlogmoa.shop");
-
-                mailSender.send(message);
+                sendEmail(message, findMember);
             }
         }
 
         RssReader.contentsStatus = ContentsStatus.DEFAULT;
+    }
+
+    private void sendEmail(SimpleMailMessage message, Member findMember) {
+        if (findMember.getMailReceiptStatus() == MailReceiptStatus.Y) {
+            message.setTo(findMember.getEmail());
+            message.setSubject("devlogmoa");
+            message.setText("devlogmoa에서 새로운 소식이 올라왔어요!! 확인하세요!! http://www.devlogmoa.shop");
+
+            mailSender.send(message);
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.devlogmoa.config.auth.dto;
 
+import com.devlogmoa.domain.member.MailReceiptStatus;
 import com.devlogmoa.domain.member.Member;
 import com.devlogmoa.domain.member.Role;
 import lombok.Builder;
@@ -53,12 +54,14 @@ public class OAuthAttributes {
     }
 
     // OAuthAttributes에서 엔티티를 생성하는 시점은 처음 가입할 때 인데
-    // 이 때 기본 권한을 USER로 주기 위해서 role 빌더값에 USER 사용
+    // 가입 시 권한을 USER로 주기 위해서 role 빌더값에 USER 사용
+    // 가입 시 메일 수신으로 셋팅
     public Member toEntity() {
         return Member.builder()
                 .name(name)
                 .email(email)
                 .role(Role.USER)
+                .mailReceiptStatus(MailReceiptStatus.Y)
                 .build();
     }
 }

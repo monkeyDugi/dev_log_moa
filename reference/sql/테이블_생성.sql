@@ -19,6 +19,7 @@ create table blog_contents (
 create table member (
                         member_id bigint auto_increment,
                         email varchar(255) not null,
+                        mail_receipt_status varchar(255) not null,
                         name varchar(255) not null,
                         role varchar(255) not null,
                         primary key (member_id)
