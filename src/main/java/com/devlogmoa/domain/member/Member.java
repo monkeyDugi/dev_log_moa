@@ -28,6 +28,7 @@ public class Member extends BaseTimeEntity {
     private Role role;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private MailReceiptStatus mailReceiptStatus;
 
 
