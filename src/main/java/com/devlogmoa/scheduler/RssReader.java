@@ -11,6 +11,7 @@ import com.devlogmoa.web.dto.response.rss.RssResponseDto;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.FeedException;
+import com.sun.syndication.io.ParsingFeedException;
 import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 import lombok.RequiredArgsConstructor;
@@ -31,14 +32,19 @@ public class RssReader {
     public static ContentsStatus contentsStatus = ContentsStatus.DEFAULT;
 
     @Transactional
-    public void createRssData(String url, String rssUrl) throws IOException, FeedException {
-        SyndFeed feed = new SyndFeedInput().build(new XmlReader(new URL(rssUrl)));
-        List<SyndEntry> entries = feed.getEntries();
+    public void createRssData(String url, String rssUrl) throws IOException {
+        SyndFeed feed = null;
+        try {
+            feed = new SyndFeedInput().build(new XmlReader(new URL(rssUrl)));
+            List<SyndEntry> entries = feed.getEntries();
 
-        String blogTitle = feed.getTitle();
+            String blogTitle = feed.getTitle();
 
-        Blog blog = createBlog(url, rssUrl, blogTitle);
-        createBlogContents(blog, entries);
+            Blog blog = createBlog(url, rssUrl, blogTitle);
+            createBlogContents(blog, entries);
+        } catch (FeedException e) {
+            System.out.println(e.getMessage() + ", rssUrl : " + rssUrl);
+        }
     }
 
     private Blog createBlog(String blogLink, String blogRssLink, String blogTitle) {
