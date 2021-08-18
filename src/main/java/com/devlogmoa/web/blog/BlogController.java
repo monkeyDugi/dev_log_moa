@@ -2,7 +2,6 @@ package com.devlogmoa.web.blog;
 
 import com.devlogmoa.config.auth.LoginMember;
 import com.devlogmoa.config.auth.dto.SessionMember;
-import com.devlogmoa.domain.member.MailReceiptStatus;
 import com.devlogmoa.domain.member.Member;
 import com.devlogmoa.domain.member.Role;
 import com.devlogmoa.repository.member.MemberRepository;
@@ -32,7 +31,7 @@ public class BlogController {
 
     @GetMapping("/")
     public String findBLogContents(Model model, @LoginMember SessionMember member, @PageableDefault(size = 10) Pageable pageable) {
-        Page<BlogContentsResponseDto> blogContents = blogService.findAllByOrderByPubDateDesc(pageable);
+        Page<BlogContentsResponseDto> blogContents = blogService.findAllByOrderByPubDateDescIdDesc(pageable);
 
         model.addAttribute("blogContents", blogContents);
 

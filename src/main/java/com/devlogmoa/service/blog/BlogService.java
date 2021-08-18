@@ -23,8 +23,8 @@ public class BlogService {
     private final BlogRepository blogRepository;
     private final MemberRepository memberRepository;
 
-    public Page<BlogContentsResponseDto> findAllByOrderByPubDateDesc(Pageable pageable) {
-        return blogContentsRepository.findAllByOrderByPubDateDesc(pageable);
+    public Page<BlogContentsResponseDto> findAllByOrderByPubDateDescIdDesc(Pageable pageable) {
+        return blogContentsRepository.findAllByOrderByPubDateDescIdDesc(pageable);
     }
 
     public Page<BlogResponseDto> findAllBlog(Pageable pageable, SessionMember member) {

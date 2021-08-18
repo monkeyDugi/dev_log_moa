@@ -20,7 +20,7 @@ public class BlogContentsRepositoryImpl implements BlogContentsRepositoryCustom 
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public Page<BlogContentsResponseDto> findAllByOrderByPubDateDesc(Pageable pageable) {
+    public Page<BlogContentsResponseDto> findAllByOrderByPubDateDescIdDesc(Pageable pageable) {
 
         QueryResults<BlogContentsResponseDto> result =
                 queryFactory.select(
@@ -37,6 +37,7 @@ public class BlogContentsRepositoryImpl implements BlogContentsRepositoryCustom 
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .orderBy(QBlogContents.blogContents.pubDate.desc())
+                .orderBy(QBlogContents.blogContents.id.desc())
                 .fetchResults();
 
         return new PageImpl<>(result.getResults(), pageable, result.getTotal());

@@ -6,5 +6,5 @@ import org.springframework.data.domain.Pageable;
 
 public interface BlogContentsRepositoryCustom {
 
-    Page<BlogContentsResponseDto> findAllByOrderByPubDateDesc(Pageable pageable);
+    Page<BlogContentsResponseDto> findAllByOrderByPubDateDescIdDesc(Pageable pageable);
 }
