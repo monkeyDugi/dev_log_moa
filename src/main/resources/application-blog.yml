@@ -77,48 +77,52 @@ blogs:
 #    -
 #      url: https://medium.com/team-mangoplate
 #      rssUrl: https://medium.com/feed/team-mangoplate
-#      title: 망고플레이트
-    -
-      url: https://medium.com/coupang-tech
-      rssUrl: https://medium.com/feed/coupang-tech
-      title: 쿠팡
-    -
-      url: https://helloworld.kurly.com
-      rssUrl: https://helloworld.kurly.com/feed.xml
-      title: 마켓컬리
-    -
-      url: https://medium.com/humanscape-tech
-      rssUrl: https://medium.com/feed/humanscape-tech
-      title: 휴머스케이프
-    -
-      url: https://medium.com/bunjang-tech-blog
-      rssUrl: https://medium.com/feed/bunjang-tech-blog
-      title: 번개장터
-    -
-      url: https://danawalab.github.io/
-      rssUrl: https://danawalab.github.io/feed
-      title: 다나와
-    -
-      url: https://medium.com/wantedjobs
-      rssUrl: https://medium.com/feed/wantedjobs
-      title: 원티드
-    -
-      url: https://riiidtechblog.medium.com/
-      rssUrl: https://medium.com/feed/@riiidtechblog
-      title: Riiid
-    -
-      url: https://pushnewsdev.github.io
-      rssUrl: https://pushnewsdev.github.io/feed
-      title: 푸시뉴스
-    -
-      url: https://tech.oliveyoung.co.kr
-      rssUrl: https://tech.oliveyoung.co.kr/feed
-      title: 올리브영
-    -
-      url: https://devlog-h.tistory.com
-      rssUrl: https://devlog-h.tistory.com/rss
-      title: 휴몬랩
-    -
-      url: https://www.cubrid.com/blog
-      rssUrl: https://www.cubrid.com/blog/rss
-      title: 큐브리드
+##      title: 망고플레이트
+#    -
+#      url: https://medium.com/coupang-tech
+#      rssUrl: https://medium.com/feed/coupang-tech
+#      title: 쿠팡
+#    -
+#      url: https://helloworld.kurly.com
+#      rssUrl: https://helloworld.kurly.com/feed.xml
+#      title: 마켓컬리
+#    -
+#      url: https://medium.com/humanscape-tech
+#      rssUrl: https://medium.com/feed/humanscape-tech
+#      title: 휴머스케이프
+#    -
+#      url: https://medium.com/bunjang-tech-blog
+#      rssUrl: https://medium.com/feed/bunjang-tech-blog
+#      title: 번개장터
+#    -
+#      url: https://danawalab.github.io/
+#      rssUrl: https://danawalab.github.io/feed
+#      title: 다나와
+#    -
+#      url: https://medium.com/wantedjobs
+#      rssUrl: https://medium.com/feed/wantedjobs
+#      title: 원티드
+#    -
+#      url: https://riiidtechblog.medium.com/
+#      rssUrl: https://medium.com/feed/@riiidtechblog
+#      title: Riiid
+#    -
+#      url: https://pushnewsdev.github.io
+#      rssUrl: https://pushnewsdev.github.io/feed
+#      title: 푸시뉴스
+#    -
+#      url: https://tech.oliveyoung.co.kr
+#      rssUrl: https://tech.oliveyoung.co.kr/feed
+#      title: 올리브영
+#    -
+#      url: https://devlog-h.tistory.com
+#      rssUrl: https://devlog-h.tistory.com/rss
+#      title: 휴몬랩
+#    -
+#      url: https://www.cubrid.com/blog
+#      rssUrl: https://www.cubrid.com/blog/rss
+#      title: 큐브리드
+#    -
+#      url: https://medium.com/daangn
+#      rssUrl: https://medium.com/feed/daangn
+#      title: 당근마켓
