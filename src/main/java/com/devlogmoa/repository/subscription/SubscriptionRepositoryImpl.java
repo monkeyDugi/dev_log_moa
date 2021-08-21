@@ -46,7 +46,7 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepositoryCustom 
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .where(QBlog.blog.usageStatus.eq(UsageStatus.USE))
-                .where(QBlogContents.blogContents.pubDate.gt(LocalDate.now().minusDays(8)))
+                .where(QBlogContents.blogContents.pubDate.gt(LocalDate.now().minusDays(31)))
                 .orderBy(QBlogContents.blogContents.pubDate.desc())
                 .fetchResults();
 
