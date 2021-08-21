@@ -74,38 +74,14 @@ blogs:
       url: https://tosslab.github.io/
       rssUrl: https://tosslab.github.io/feed.xml
       title: 토스랩
-#    -
-#      url: https://medium.com/team-mangoplate
-#      rssUrl: https://medium.com/feed/team-mangoplate
-#      title: 망고플레이트
-#    -
-#      url: https://medium.com/coupang-tech
-#      rssUrl: https://medium.com/feed/coupang-tech
-#      title: 쿠팡
     -
       url: https://helloworld.kurly.com
       rssUrl: https://helloworld.kurly.com/feed.xml
       title: 마켓컬리
-#    -
-#      url: https://medium.com/humanscape-tech
-#      rssUrl: https://medium.com/feed/humanscape-tech
-#      title: 휴머스케이프
-#    -
-#      url: https://medium.com/bunjang-tech-blog
-#      rssUrl: https://medium.com/feed/bunjang-tech-blog
-#      title: 번개장터
     -
       url: https://danawalab.github.io/
       rssUrl: https://danawalab.github.io/feed
       title: 다나와
-#    -
-#      url: https://medium.com/wantedjobs
-#      rssUrl: https://medium.com/feed/wantedjobs
-#      title: 원티드
-#    -
-#      url: https://riiidtechblog.medium.com/
-#      rssUrl: https://medium.com/feed/@riiidtechblog
-#      title: Riiid
     -
       url: https://pushnewsdev.github.io
       rssUrl: https://pushnewsdev.github.io/feed
@@ -122,7 +98,69 @@ blogs:
       url: https://www.cubrid.com/blog
       rssUrl: https://www.cubrid.com/blog/rss
       title: 큐브리드
+    -
+      url: https://cheese10yun.github.io/archive/
+      rssUrl: https://cheese10yun.github.io/feed.xml
+      title: Yun Blog
+    -
+      url: https://netflixtechblog.com/
+      rssUrl: https://netflixtechblog.com/feed
+      title: netflix
+    -
+      url: https://instagram-engineering.com/
+      rssUrl: https://instagram-engineering.com/feed
+      title: Instagram
+###########      403목록(현재 medium)
 #    -
 #      url: https://medium.com/daangn
 #      rssUrl: https://medium.com/feed/daangn
 #      title: 당근마켓
+#    -
+#      url: https://medium.com/deliverytechkorea
+#      rssUrl: https://medium.com/feed/deliverytechkorea
+#      title: 요기요
+#    -
+#      url: https://medium.com/wantedjobs
+#      rssUrl: https://medium.com/feed/wantedjobs
+#      title: 원티드
+#    -
+#      url: https://riiidtechblog.medium.com/
+#      rssUrl: https://medium.com/feed/@riiidtechblog
+#      title: Riiid
+#    -
+#      url: https://medium.com/humanscape-tech
+#      rssUrl: https://medium.com/feed/humanscape-tech
+#      title: 휴머스케이프
+#    -
+#      url: https://medium.com/bunjang-tech-blog
+#      rssUrl: https://medium.com/feed/bunjang-tech-blog
+#      title: 번개장터
+#    -
+#      url: https://medium.com/team-mangoplate
+#      rssUrl: https://medium.com/feed/team-mangoplate
+#      title: 망고플레이트
+#    -
+#      url: https://medium.com/coupang-tech
+#      rssUrl: https://medium.com/feed/coupang-tech
+#      title: 쿠팡
+#    -
+#      url: https://medium.com/musinsa-tech
+#      rssUrl: https://medium.com/feed/musinsa-tech
+#      title: 무신사
+###########      형식이 달라서 불가한 목록
+#    -
+#      url: https://d2.naver.com/home
+#      rssUrl: https://d2.naver.com/d2.atom
+#      title: Instagram
+#    -
+#      url: https://tech.kakao.com/
+#      rssUrl: https://tech.kakao.com/feed/
+#      title: 카카오
+#    -
+#      url: https://engineering.linecorp.com/ko/blog/
+#      rssUrl:
+#      title: 라인
+#    -
+#      url: https://meetup.toast.com/
+#      rssUrl: https://meetup.toast.com/rss
+#      title: NHN
