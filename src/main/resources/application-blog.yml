@@ -74,10 +74,10 @@ blogs:
       url: https://tosslab.github.io/
       rssUrl: https://tosslab.github.io/feed.xml
       title: 토스랩
-    -
-      url: https://medium.com/team-mangoplate
-      rssUrl: https://medium.com/feed/team-mangoplate
-      title: 망고플레이트
+#    -
+#      url: https://medium.com/team-mangoplate
+#      rssUrl: https://medium.com/feed/team-mangoplate
+#      title: 망고플레이트
     -
       url: https://medium.com/coupang-tech
       rssUrl: https://medium.com/feed/coupang-tech
