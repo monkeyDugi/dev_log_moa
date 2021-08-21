@@ -82,10 +82,10 @@ blogs:
 #      url: https://medium.com/coupang-tech
 #      rssUrl: https://medium.com/feed/coupang-tech
 #      title: 쿠팡
-#    -
-#      url: https://helloworld.kurly.com
-#      rssUrl: https://helloworld.kurly.com/feed.xml
-#      title: 마켓컬리
+    -
+      url: https://helloworld.kurly.com
+      rssUrl: https://helloworld.kurly.com/feed.xml
+      title: 마켓컬리
 #    -
 #      url: https://medium.com/humanscape-tech
 #      rssUrl: https://medium.com/feed/humanscape-tech
@@ -94,14 +94,14 @@ blogs:
 #      url: https://medium.com/bunjang-tech-blog
 #      rssUrl: https://medium.com/feed/bunjang-tech-blog
 #      title: 번개장터
-#    -
-#      url: https://danawalab.github.io/
-#      rssUrl: https://danawalab.github.io/feed
-#      title: 다나와
-#    -
-#      url: https://medium.com/wantedjobs
-#      rssUrl: https://medium.com/feed/wantedjobs
-#      title: 원티드
+    -
+      url: https://danawalab.github.io/
+      rssUrl: https://danawalab.github.io/feed
+      title: 다나와
+    -
+      url: https://medium.com/wantedjobs
+      rssUrl: https://medium.com/feed/wantedjobs
+      title: 원티드
 #    -
 #      url: https://riiidtechblog.medium.com/
 #      rssUrl: https://medium.com/feed/@riiidtechblog
