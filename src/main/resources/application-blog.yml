@@ -31,10 +31,6 @@ blogs:
       rssUrl: https://v2.velog.io/rss/@monkeydugi
       title: monkeydugi
     -
-      url: https://medium.com/daangn
-      rssUrl: https://medium.com/feed/daangn
-      title: 당근마켓
-    -
       url: https://jaeyeophan.github.io
       rssUrl: https://jaeyeophan.github.io/feed.xml
       title: 한재엽
@@ -54,11 +50,6 @@ blogs:
       url: https://devahea.github.io
       rssUrl: https://devahea.github.io/atom.xml
       title: 아해팀
-#      pudate 태그가 아닌, updated로 되어있다.
-#    -
-#      url: https://engineering.vcnc.co.kr
-#      rssUrl: https://engineering.vcnc.co.kr/atom.xml
-#      title: VCNC
     -
       url: https://yanolja.github.io
       rssUrl: https://yanolja.github.io/feed.xml
