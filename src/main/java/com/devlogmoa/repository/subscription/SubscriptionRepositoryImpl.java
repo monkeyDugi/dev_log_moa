@@ -47,7 +47,9 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepositoryCustom 
                 .limit(pageable.getPageSize())
                 .where(QBlog.blog.usageStatus.eq(UsageStatus.USE))
                 .where(QBlogContents.blogContents.pubDate.gt(LocalDate.now().minusDays(31)))
+                .where(QMember.member.email.eq(email))
                 .orderBy(QBlogContents.blogContents.pubDate.desc())
+                .orderBy(QBlogContents.blogContents.id.desc())
                 .fetchResults();
 
         return new PageImpl<>(result.getResults(), pageable, result.getTotal());
