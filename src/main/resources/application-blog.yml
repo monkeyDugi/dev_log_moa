@@ -110,6 +110,10 @@ blogs:
       url: https://instagram-engineering.com/
       rssUrl: https://instagram-engineering.com/feed
       title: Instagram
+    -
+      url: https://cobbybb.tistory.com/
+      rssUrl: https://cobbybb.tistory.com/rss
+      title: 코비코비
 ###########      403목록(현재 medium)
 #    -
 #      url: https://medium.com/daangn
