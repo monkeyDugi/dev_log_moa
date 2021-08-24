@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Getter
 @Entity
@@ -33,12 +32,12 @@ public class BlogContents extends BaseTimeEntity {
     @Column(length = 1000)
     private String pubLink;
 
-    public boolean isNewPublish(LocalDate publishedDate, String pubLink) {
+    public boolean isNewPublish(LocalDate publishedDate) {
         if (pubDate == null) {
             return false;
         }
 
-        return pubDate.compareTo(publishedDate) < 0 && !this.pubLink.equals(pubLink);
+        return pubDate.compareTo(publishedDate) < 0;
     }
 
     public static BlogContents createPublish(RssResponseDto rssResponseDto) {

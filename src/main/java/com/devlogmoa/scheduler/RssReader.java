@@ -11,7 +11,6 @@ import com.devlogmoa.web.dto.response.rss.RssResponseDto;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.FeedException;
-import com.sun.syndication.io.ParsingFeedException;
 import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 import lombok.RequiredArgsConstructor;
@@ -72,7 +71,7 @@ public class RssReader {
     }
 
     private void createBlogContents(Blog blog, SyndEntry entry, BlogContents findLastBlogContents) {
-        if (findLastBlogContents == null || findLastBlogContents.isNewPublish(CustomDateUtils.parseLocalDate(entry.getPublishedDate()), entry.getLink())) {
+        if (findLastBlogContents == null || findLastBlogContents.isNewPublish(CustomDateUtils.parseLocalDate(entry.getPublishedDate()))) {
             BlogContents blogDetail = BlogContents.createPublish(RssResponseDto.newRss(entry, blog));
             blogContentsRepository.save(blogDetail);
 
