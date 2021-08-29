@@ -6,10 +6,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 public interface BlogContentsRepository extends JpaRepository<BlogContents, Long>, BlogContentsRepositoryCustom {
 
     BlogContents findTopByBlogIdOrderByPubDateDesc(Long blog_id);
 
     @Override
     Page<BlogContentsResponseDto> findAllByOrderByPubDateDescIdDesc(Pageable pageable);
+
+    Optional<BlogContents> findByPubLink(String link);
 }

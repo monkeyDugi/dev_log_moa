@@ -6,6 +6,7 @@ import com.devlogmoa.domain.blog.ContentsStatus;
 import com.devlogmoa.domain.blog.UsageStatus;
 import com.devlogmoa.repository.blog.BlogContentsRepository;
 import com.devlogmoa.repository.blog.BlogRepository;
+import com.devlogmoa.util.CommonRepository;
 import com.devlogmoa.util.CustomDateUtils;
 import com.devlogmoa.web.dto.response.rss.RssResponseDto;
 import com.sun.syndication.feed.synd.SyndEntry;
@@ -19,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -70,12 +72,30 @@ public class RssReader {
         }
     }
 
+    /**
+     * rss 파싱한 데이터를 저장 및 업데이트한다.
+     * @param blog : 해당 블로그 정보
+     * @param entry : rss 데이터
+     * @param findLastBlogContents : 해당 블로그 최신 글 TOP 1개
+     */
     private void createBlogContents(Blog blog, SyndEntry entry, BlogContents findLastBlogContents) {
-        if (findLastBlogContents == null || findLastBlogContents.isNewPublish(CustomDateUtils.parseLocalDate(entry.getPublishedDate()))) {
+        // 서비스 첫 오픈 시 데이터 없을 때(첫 스케줄링)
+        if (findLastBlogContents == null) {
             BlogContents blogDetail = BlogContents.createPublish(RssResponseDto.newRss(entry, blog));
             blogContentsRepository.save(blogDetail);
+        // 두 번째 스케줄링 부터는 여기
+        } else {
+            LocalDate pubDate = CustomDateUtils.parseLocalDate(entry.getPublishedDate());
 
-            contentsStatus = ContentsStatus.NEW;
+            if (findLastBlogContents.isNewPublish(pubDate)) {
+                BlogContents findBlogContents = blogContentsRepository.findByPubLink(entry.getLink())
+                        .orElseGet(() -> BlogContents.createPublish(RssResponseDto.newRss(entry, blog)));
+
+                findBlogContents.updatePubDate(pubDate);
+                CommonRepository.saveIfNullId(blogContentsRepository, findBlogContents, findBlogContents.getId());
+            }
         }
+
+        contentsStatus = ContentsStatus.NEW;
     }
 }
