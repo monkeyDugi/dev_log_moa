@@ -50,4 +50,8 @@ public class BlogContents extends BaseTimeEntity {
 
         return blogContents;
     }
+
+    public void updatePubDate(LocalDate pubDate) {
+        this.pubDate = pubDate;
+    }
 }
