@@ -114,6 +114,10 @@ blogs:
       url: https://cobbybb.tistory.com/
       rssUrl: https://cobbybb.tistory.com/rss
       title: 코비코비
+    -
+      url: https://sarojaba.medium.com/
+      rssUrl: https://medium.com/feed/@sarojaba
+      title: 우준혁
 ###########      403목록(현재 medium)
 #    -
 #      url: https://medium.com/daangn
