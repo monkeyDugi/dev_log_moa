@@ -115,6 +115,10 @@ blogs:
       rssUrl: https://cobbybb.tistory.com/rss
       title: 코비코비
     -
+      url: https://tecoble.techcourse.co.kr/
+      rssUrl: https://tecoble.techcourse.co.kr/rss.xml
+      title: 우테코
+    -
       url: https://sarojaba.medium.com/
       rssUrl: https://medium.com/feed/@sarojaba
       title: 우준혁
