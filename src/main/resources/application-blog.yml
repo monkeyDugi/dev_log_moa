@@ -118,11 +118,11 @@ blogs:
       url: https://tecoble.techcourse.co.kr/
       rssUrl: https://tecoble.techcourse.co.kr/rss.xml
       title: 우테코
-    -
-      url: https://sarojaba.medium.com/
-      rssUrl: https://medium.com/feed/@sarojaba
-      title: 우준혁
 ###########      403목록(현재 medium)
+#    -
+#      url: https://sarojaba.medium.com/
+#      rssUrl: https://medium.com/feed/@sarojaba
+#      title: 우준혁
 #    -
 #      url: https://medium.com/daangn
 #      rssUrl: https://medium.com/feed/daangn

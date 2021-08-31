@@ -100,10 +100,8 @@ public class RssReader {
                         // 신규이면 find가 null이므로 신규 컨텐츠 생성
                         .orElseGet(() -> BlogContents.createPublish(RssResponseDto.newRss(entry, blog)));
 
-                // 수정일자 업데이트
-                findBlogContents.updatePubDate(pubDate);
                 // id가 null이면 신규 컨텐츠이므로 save하는 로직
-                CommonRepository.saveIfNullId(blogContentsRepository, findBlogContents, findBlogContents.getId());
+                CommonRepository.saveIfNullId(blogContentsRepository, findBlogContents, pubDate);
 
                 // 신규 여부 상태 NEW
                 contentsStatus = ContentsStatus.NEW;
