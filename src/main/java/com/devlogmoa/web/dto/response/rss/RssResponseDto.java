@@ -34,7 +34,6 @@ public class RssResponseDto {
         return rssResponseDto;
     }
 
-    // 테스트 작성용
     public static RssResponseDto newRss(LocalDate pubDate) {
         RssResponseDto rssResponseDto = new RssResponseDto();
 
