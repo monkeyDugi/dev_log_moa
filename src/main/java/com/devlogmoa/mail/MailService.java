@@ -20,16 +20,12 @@ public class MailService {
     private final MemberRepository memberRepository;
 
     public void sendEmail() {
-        if (ContentsStatus.NEW == RssReader.contentsStatus) {
-            List<Member> findMembers = memberRepository.findAll();
-            SimpleMailMessage message = new SimpleMailMessage();
+        List<Member> findMembers = memberRepository.findAll();
+        SimpleMailMessage message = new SimpleMailMessage();
 
-            for (Member findMember : findMembers) {
-                sendEmail(message, findMember);
-            }
+        for (Member findMember : findMembers) {
+            sendEmail(message, findMember);
         }
-
-        RssReader.contentsStatus = ContentsStatus.DEFAULT;
     }
 
     private void sendEmail(SimpleMailMessage message, Member findMember) {

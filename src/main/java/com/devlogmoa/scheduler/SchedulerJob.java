@@ -2,6 +2,7 @@ package com.devlogmoa.scheduler;
 
 import com.devlogmoa.config.blog.BlogProperties;
 import com.devlogmoa.config.blog.BlogPropertiesDto;
+import com.devlogmoa.domain.blog.ContentsStatus;
 import com.devlogmoa.mail.MailService;
 import com.devlogmoa.util.CustomBeanUtil;
 import lombok.SneakyThrows;
@@ -30,6 +31,8 @@ public class SchedulerJob implements Job {
             rssReader.createRssData(blogUrl.getUrl(), blogUrl.getRssUrl());
         }
 
-        mailService.sendEmail();
+        if (rssReader.isContentsStatus()) {
+            mailService.sendEmail();
+        }
     }
 }

@@ -30,11 +30,12 @@ public class RssReader {
     private final BlogRepository blogRepository;
     private final BlogContentsRepository blogContentsRepository;
 
-    public static ContentsStatus contentsStatus = ContentsStatus.DEFAULT;
+    private ContentsStatus contentsStatus = ContentsStatus.DEFAULT;
 
     @Transactional
     public void createRssData(String url, String rssUrl) throws IOException {
         SyndFeed feed;
+
         try {
             feed = new SyndFeedInput().build(new XmlReader(new URL(rssUrl)));
             List<SyndEntry> entries = feed.getEntries();
@@ -78,34 +79,46 @@ public class RssReader {
      * @param entry : rss 데이터
      * @param findLastBlogContents : 해당 블로그 최신 글 TOP 1개
      */
-    protected void createBlogContents(Blog blog, SyndEntry entry, BlogContents findLastBlogContents) {
-        // 서비스 첫 오픈 시 데이터 없을 때(첫 스케줄링)
+    void createBlogContents(Blog blog, SyndEntry entry, BlogContents findLastBlogContents) {
         if (findLastBlogContents == null) {
-            // rss에서 가져온 신규 컨텐츠 생성
             BlogContents blogDetail = BlogContents.createPublish(RssResponseDto.newRss(entry, blog));
-            // 신규 컨텐츠 저장
             blogContentsRepository.save(blogDetail);
 
-            // 신규 여부 상태 NEW
             contentsStatus = ContentsStatus.NEW;
-        // 두 번째 스케줄링 부터는 여기
         } else {
-            // rss에서 가져온 하나의 컨테츠 수정일자
             LocalDate pubDate = CustomDateUtils.parseLocalDate(entry.getPublishedDate());
 
-            // 신규이거나 수정이거나
             if (findLastBlogContents.isNewPublish(pubDate)) {
-                // 수정이면 이미 존재하는 컨텐츠이므로 find
                 BlogContents findBlogContents = blogContentsRepository.findByPubLink(entry.getLink())
-                        // 신규이면 find가 null이므로 신규 컨텐츠 생성
                         .orElseGet(() -> BlogContents.createPublish(RssResponseDto.newRss(entry, blog)));
 
-                // id가 null이면 신규 컨텐츠이므로 save하는 로직
-                CommonRepository.saveIfNullId(blogContentsRepository, findBlogContents, pubDate);
+                findBlogContents.updatePubDate(pubDate);
+                CommonRepository.saveIfNullId(blogContentsRepository, findBlogContents, findBlogContents.getId());
 
-                // 신규 여부 상태 NEW
                 contentsStatus = ContentsStatus.NEW;
             }
         }
+    }
+
+    /**
+     * 신규 컨텐츠가 있으면 true를 반환하고, 상태를 DEFAULT로 초기화.
+     * @return boolean
+     */
+    public boolean isContentsStatus() {
+        if (contentsStatus == ContentsStatus.NEW) {
+            contentsStatus = ContentsStatus.DEFAULT;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    ContentsStatus test_getContentsStatus() {
+        return contentsStatus;
+    }
+
+    void test_setContentsStatus(ContentsStatus contentsStatus) {
+        this.contentsStatus = contentsStatus;
     }
 }
