@@ -79,7 +79,7 @@ public class RssReader {
      * @param entry : rss 데이터
      * @param findLastBlogContents : 해당 블로그 최신 글 TOP 1개
      */
-    protected void createBlogContents(Blog blog, SyndEntry entry, BlogContents findLastBlogContents) {
+    void createBlogContents(Blog blog, SyndEntry entry, BlogContents findLastBlogContents) {
         if (findLastBlogContents == null) {
             BlogContents blogDetail = BlogContents.createPublish(RssResponseDto.newRss(entry, blog));
             blogContentsRepository.save(blogDetail);
