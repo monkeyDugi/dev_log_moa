@@ -118,6 +118,10 @@ blogs:
       url: https://tecoble.techcourse.co.kr/
       rssUrl: https://tecoble.techcourse.co.kr/rss.xml
       title: 우테코
+    -
+      url: https://kim-jong-hyun.tistory.com/
+      rssUrl: https://kim-jong-hyun.tistory.com/rss
+      title: 김종현
 ###########      403목록(현재 medium)
 #    -
 #      url: https://sarojaba.medium.com/
