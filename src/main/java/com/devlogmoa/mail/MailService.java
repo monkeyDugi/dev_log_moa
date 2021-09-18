@@ -1,10 +1,8 @@
 package com.devlogmoa.mail;
 
-import com.devlogmoa.domain.blog.ContentsStatus;
 import com.devlogmoa.domain.member.MailReceiptStatus;
 import com.devlogmoa.domain.member.Member;
 import com.devlogmoa.repository.member.MemberRepository;
-import com.devlogmoa.scheduler.RssReader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

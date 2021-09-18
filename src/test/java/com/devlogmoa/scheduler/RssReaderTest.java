@@ -2,6 +2,7 @@ package com.devlogmoa.scheduler;
 
 import com.devlogmoa.domain.blog.BlogContents;
 import com.devlogmoa.domain.blog.ContentsStatus;
+import com.devlogmoa.mail.MailService;
 import com.devlogmoa.repository.blog.BlogContentsRepository;
 import com.devlogmoa.repository.blog.BlogRepository;
 import com.sun.syndication.feed.synd.SyndEntry;
@@ -35,7 +36,9 @@ class RssReaderTest {
         SyndEntry syndEntry = Mockito.mock(SyndEntry.class);
         BlogRepository blogRepository = Mockito.mock(BlogRepository.class);
         BlogContentsRepository blogContentsRepository = Mockito.mock(BlogContentsRepository.class);
-        rssReader = new RssReader(blogRepository, blogContentsRepository);
+        MailService mailService = Mockito.mock(MailService.class);
+
+        rssReader = new RssReader(blogRepository, blogContentsRepository, mailService);
 
         when(syndEntry.getPublishedDate()).thenReturn(PUBLISHED_DATE);
         when(syndEntry.getTitle()).thenReturn(TITLE);
@@ -43,11 +46,11 @@ class RssReaderTest {
         when(blogContentsRepository.save(any())).thenReturn(null);
 
         // when
-        rssReader.createBlogContents(null, syndEntry, null);
+        ContentsStatus contentsStatus = rssReader.createBlogContents(null, syndEntry, null);
 
         // then
         verify(blogContentsRepository, times(1)).save(any());
-        assertThat(rssReader.isContentsStatus()).isTrue();
+        assertThat(contentsStatus).isEqualTo(ContentsStatus.NEW);
     }
 
     @DisplayName("기초 데이터 생긴 후 신규 및 수정 컨텐츠가 없으면 아무것도 실행하지 않는다. contentsStatus는 DEFAULT.")
@@ -58,18 +61,20 @@ class RssReaderTest {
         BlogContents findLastBlogContents = Mockito.mock(BlogContents.class);
         BlogRepository blogRepository = Mockito.mock(BlogRepository.class);
         BlogContentsRepository blogContentsRepository = Mockito.mock(BlogContentsRepository.class);
-        rssReader = new RssReader(blogRepository, blogContentsRepository);
+        MailService mailService = Mockito.mock(MailService.class);
+
+        rssReader = new RssReader(blogRepository, blogContentsRepository, mailService);
 
         when(syndEntry.getPublishedDate()).thenReturn(PUBLISHED_DATE);
         when(findLastBlogContents.isNewPublish(any())).thenReturn(false);
 
         // when
-        rssReader.createBlogContents(null, syndEntry, findLastBlogContents);
+        ContentsStatus contentsStatus = rssReader.createBlogContents(null, syndEntry, findLastBlogContents);
 
         // then
         verify(blogContentsRepository, times(0)).save(any());
         verify(blogContentsRepository, times(0)).findByPubLink(any());
-        assertThat(rssReader.isContentsStatus()).isFalse();
+        assertThat(contentsStatus).isNotEqualTo(ContentsStatus.NEW);
     }
 
     @DisplayName("기초 데이터 생긴 후 신규 or 수정 컨텐츠 일 때. contentsStatus는 NEW.")
@@ -80,50 +85,18 @@ class RssReaderTest {
         BlogContents findLastBlogContents = Mockito.mock(BlogContents.class);
         BlogRepository blogRepository = Mockito.mock(BlogRepository.class);
         BlogContentsRepository blogContentsRepository = Mockito.mock(BlogContentsRepository.class);
-        rssReader = new RssReader(blogRepository, blogContentsRepository);
+        MailService mailService = Mockito.mock(MailService.class);
+
+        rssReader = new RssReader(blogRepository, blogContentsRepository, mailService);
 
         when(syndEntry.getPublishedDate()).thenReturn(PUBLISHED_DATE);
         when(findLastBlogContents.isNewPublish(any())).thenReturn(true);
 
         // when
-        rssReader.createBlogContents(null, syndEntry, findLastBlogContents);
+        ContentsStatus contentsStatus = rssReader.createBlogContents(null, syndEntry, findLastBlogContents);
 
         // then
         verify(blogContentsRepository, times(1)).save(any());
-        assertThat(rssReader.isContentsStatus()).isTrue();
-    }
-
-    @DisplayName("신규 컨텐츠가 있으면 true를 반환하고 상태를 DEFAULT로 초기화")
-    @Test
-    void true_isContentsStatus() {
-        // given
-        BlogRepository blogRepository = Mockito.mock(BlogRepository.class);
-        BlogContentsRepository blogContentsRepository = Mockito.mock(BlogContentsRepository.class);
-        rssReader = new RssReader(blogRepository, blogContentsRepository);
-
-        rssReader.test_setContentsStatus(ContentsStatus.NEW);
-
-        // when
-        boolean contentsStatus = rssReader.isContentsStatus();
-
-        // then
-        assertThat(contentsStatus).isTrue();
-        assertThat(rssReader.test_getContentsStatus()).isEqualTo(ContentsStatus.DEFAULT);
-    }
-
-    @DisplayName("신규 컨텐츠가 있으면 false를 반환하고 상태는 DEFAULT 유지")
-    @Test
-    void false_isContentsStatus() {
-        // given
-        BlogRepository blogRepository = Mockito.mock(BlogRepository.class);
-        BlogContentsRepository blogContentsRepository = Mockito.mock(BlogContentsRepository.class);
-        rssReader = new RssReader(blogRepository, blogContentsRepository);
-
-        // when
-        boolean contentsStatus = rssReader.isContentsStatus();
-
-        // then
-        assertThat(contentsStatus).isFalse();
-        assertThat(rssReader.test_getContentsStatus()).isEqualTo(ContentsStatus.DEFAULT);
+        assertThat(contentsStatus).isEqualTo(ContentsStatus.NEW);
     }
 }
