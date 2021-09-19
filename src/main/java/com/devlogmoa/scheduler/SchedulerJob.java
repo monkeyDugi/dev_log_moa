@@ -1,15 +1,11 @@
 package com.devlogmoa.scheduler;
 
 import com.devlogmoa.config.blog.BlogProperties;
-import com.devlogmoa.config.blog.BlogPropertiesDto;
-import com.devlogmoa.mail.MailService;
 import com.devlogmoa.util.CustomBeanUtil;
 import lombok.SneakyThrows;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-
-import java.util.List;
 
 /**
  * RssReader의 bean을 조회하여 사용한다.
@@ -23,16 +19,6 @@ public class SchedulerJob implements Job {
     public void execute(JobExecutionContext context) throws JobExecutionException {
         RssReader rssReader = (RssReader) CustomBeanUtil.getBean("rssReader");
         BlogProperties blogProperties = (BlogProperties) CustomBeanUtil.getBean("blogProperties");
-        MailService mailService = (MailService) CustomBeanUtil.getBean("mailService");
-//        List<BlogPropertiesDto> blogUrls = blogProperties.getList();
-
-//        for (BlogPropertiesDto blogUrl : blogUrls) {
-//            rssReader.createRssData(blogUrl.getUrl(), blogUrl.getRssUrl());
-//        }
-
-//        if (rssReader.isContentsStatus()) {
-//            mailService.sendEmail();
-//        }
 
         rssReader.createRssData(blogProperties);
     }
