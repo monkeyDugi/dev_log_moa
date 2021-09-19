@@ -110,3 +110,16 @@ awesome-devblog는 내가 구독하여 볼 수 있는 기능이 아쉬웠다.
   
 ## 이슈 사항!
 - [블로그 정리](https://velog.io/@monkeydugi/devlogmoa-%EC%9D%B4%EC%8A%88)
+
+## 커밋 규칙
+- [앵귤러 규칙 참고](https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#heading=h.em2hiij8p46d)  
+번역본
+  - feat : 새로운 기능에 대한 커밋
+  - fix : 버그 수정에 대한 커밋
+  - build : 빌드 관련 파일 수정에 대한 커밋
+  - chore : 그 외 자잘한 수정에 대한 커밋
+  - ci : CI관련 설정 수정에 대한 커밋
+  - docs : 문서 수정에 대한 커밋
+  - style : 코드 스타일 혹은 포맷 등에 관한 커밋
+  - refactor :  코드 리팩토링에 대한 커밋
+  - test : 테스트 코드 수정에 대한 커밋  

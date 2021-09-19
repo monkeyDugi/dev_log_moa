@@ -1,9 +1,12 @@
 package com.devlogmoa.scheduler;
 
+import com.devlogmoa.config.blog.BlogProperties;
+import com.devlogmoa.config.blog.BlogPropertiesDto;
 import com.devlogmoa.domain.blog.Blog;
 import com.devlogmoa.domain.blog.BlogContents;
 import com.devlogmoa.domain.blog.ContentsStatus;
 import com.devlogmoa.domain.blog.UsageStatus;
+import com.devlogmoa.mail.MailService;
 import com.devlogmoa.repository.blog.BlogContentsRepository;
 import com.devlogmoa.repository.blog.BlogRepository;
 import com.devlogmoa.util.CommonRepository;
@@ -29,12 +32,24 @@ public class RssReader {
 
     private final BlogRepository blogRepository;
     private final BlogContentsRepository blogContentsRepository;
-
-    private ContentsStatus contentsStatus = ContentsStatus.DEFAULT;
+    private final MailService mailService;
 
     @Transactional
-    public void createRssData(String url, String rssUrl) throws IOException {
+    public void createRssData(BlogProperties blogProperties) throws IOException {
+        ContentsStatus contentsStatus = ContentsStatus.DEFAULT;
+
+        for (BlogPropertiesDto blogPropertiesDto : blogProperties.getList()) {
+            contentsStatus = createRssData(blogPropertiesDto.getUrl(), blogPropertiesDto.getRssUrl());
+        }
+
+        if (contentsStatus == ContentsStatus.NEW) {
+            mailService.sendEmail();
+        }
+    }
+
+    private ContentsStatus createRssData(String url, String rssUrl) throws IOException {
         SyndFeed feed;
+        ContentsStatus contentsStatus = ContentsStatus.DEFAULT;
 
         try {
             feed = new SyndFeedInput().build(new XmlReader(new URL(rssUrl)));
@@ -43,10 +58,12 @@ public class RssReader {
             String blogTitle = feed.getTitle();
 
             Blog blog = createBlog(url, rssUrl, blogTitle);
-            createBlogContents(blog, entries);
+            contentsStatus = createBlogContents(blog, entries);
         } catch (FeedException e) {
             System.out.println(e.getMessage() + ", rssUrl : " + rssUrl);
         }
+
+        return contentsStatus;
     }
 
     private Blog createBlog(String blogLink, String blogRssLink, String blogTitle) {
@@ -63,14 +80,18 @@ public class RssReader {
         return findByBlog;
     }
 
-    private void createBlogContents(Blog blog, List<SyndEntry> entries) {
+    private ContentsStatus createBlogContents(Blog blog, List<SyndEntry> entries) {
+        ContentsStatus contentsStatus = ContentsStatus.DEFAULT;
+
         if (UsageStatus.isUse(blog.getUsageStatus())) {
             BlogContents findLastBlogContents = blogContentsRepository.findTopByBlogIdOrderByPubDateDesc(blog.getId());
 
             for (SyndEntry entry : entries) {
-                createBlogContents(blog, entry, findLastBlogContents);
+                contentsStatus = createBlogContents(blog, entry, findLastBlogContents);
             }
         }
+
+        return contentsStatus;
     }
 
     /**
@@ -79,7 +100,8 @@ public class RssReader {
      * @param entry : rss 데이터
      * @param findLastBlogContents : 해당 블로그 최신 글 TOP 1개
      */
-    void createBlogContents(Blog blog, SyndEntry entry, BlogContents findLastBlogContents) {
+    ContentsStatus createBlogContents(Blog blog, SyndEntry entry, BlogContents findLastBlogContents) {
+        ContentsStatus contentsStatus = ContentsStatus.DEFAULT;
         if (findLastBlogContents == null) {
             BlogContents blogDetail = BlogContents.createPublish(RssResponseDto.newRss(entry, blog));
             blogContentsRepository.save(blogDetail);
@@ -98,27 +120,7 @@ public class RssReader {
                 contentsStatus = ContentsStatus.NEW;
             }
         }
-    }
 
-    /**
-     * 신규 컨텐츠가 있으면 true를 반환하고, 상태를 DEFAULT로 초기화.
-     * @return boolean
-     */
-    public boolean isContentsStatus() {
-        if (contentsStatus == ContentsStatus.NEW) {
-            contentsStatus = ContentsStatus.DEFAULT;
-
-            return true;
-        }
-
-        return false;
-    }
-
-    ContentsStatus test_getContentsStatus() {
         return contentsStatus;
-    }
-
-    void test_setContentsStatus(ContentsStatus contentsStatus) {
-        this.contentsStatus = contentsStatus;
     }
 }
