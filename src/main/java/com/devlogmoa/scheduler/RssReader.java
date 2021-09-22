@@ -115,6 +115,7 @@ public class RssReader {
                         .orElseGet(() -> BlogContents.createPublish(RssResponseDto.newRss(entry, blog)));
 
                 findBlogContents.updatePubDate(pubDate);
+
                 CommonRepository.saveIfNullId(blogContentsRepository, findBlogContents, findBlogContents.getId());
 
                 contentsStatus = ContentsStatus.NEW;
