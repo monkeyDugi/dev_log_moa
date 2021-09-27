@@ -5,17 +5,16 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum MailReceiptStatus {
 
-    Y("Y", "메일 수신"),
-    N("N", "메일 미수신");
+    USE("USE"),
+    UNUSED("UNUSED");
 
     private final String key;
-    private final String value;
 
-    public static MailReceiptStatus  createMailReceiptStatus(String mailReceiptStatus) {
-        if ("Y".equals(mailReceiptStatus)) {
-            return MailReceiptStatus.Y;
+    public static MailReceiptStatus createMailReceiptStatus(String mailReceiptStatus) {
+        if (USE.key.equals(mailReceiptStatus)) {
+            return MailReceiptStatus.USE;
         }
 
-        return MailReceiptStatus.N;
+        return MailReceiptStatus.UNUSED;
     }
 }

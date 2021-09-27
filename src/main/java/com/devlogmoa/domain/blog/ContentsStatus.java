@@ -5,9 +5,6 @@ package com.devlogmoa.domain.blog;
  */
 public enum ContentsStatus {
 
-    NEW(true, "신규 컨텐츠 있음"),
-    DEFAULT(false, "신규 컨텐츠 없음, 클래스 설명용");
-
-    ContentsStatus(boolean status, String description) {
-    }
+    NEW,
+    OLD
 }

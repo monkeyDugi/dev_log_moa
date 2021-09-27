@@ -115,9 +115,9 @@ const blogs = {
         let param = ''
 
         if (checked === 'checked') {
-            param = 'N'
+            param = 'UNUSED'
         } else {
-            param = 'Y'
+            param = 'USE'
         }
         $.ajax({
             type: 'PUT',

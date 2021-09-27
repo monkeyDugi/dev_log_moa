@@ -18,6 +18,7 @@ import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 @Component
 public class RssReader {
@@ -36,7 +38,7 @@ public class RssReader {
 
     @Transactional
     public void createRssData(BlogProperties blogProperties) throws IOException {
-        ContentsStatus contentsStatus = ContentsStatus.DEFAULT;
+        ContentsStatus contentsStatus = ContentsStatus.OLD;
 
         for (BlogPropertiesDto blogPropertiesDto : blogProperties.getList()) {
             contentsStatus = createRssData(blogPropertiesDto.getUrl(), blogPropertiesDto.getRssUrl());
@@ -49,7 +51,7 @@ public class RssReader {
 
     private ContentsStatus createRssData(String url, String rssUrl) throws IOException {
         SyndFeed feed;
-        ContentsStatus contentsStatus = ContentsStatus.DEFAULT;
+        ContentsStatus contentsStatus = ContentsStatus.OLD;
 
         try {
             feed = new SyndFeedInput().build(new XmlReader(new URL(rssUrl)));
@@ -81,7 +83,7 @@ public class RssReader {
     }
 
     private ContentsStatus createBlogContents(Blog blog, List<SyndEntry> entries) {
-        ContentsStatus contentsStatus = ContentsStatus.DEFAULT;
+        ContentsStatus contentsStatus = ContentsStatus.OLD;
 
         if (UsageStatus.isUse(blog.getUsageStatus())) {
             BlogContents findLastBlogContents = blogContentsRepository.findTopByBlogIdOrderByPubDateDesc(blog.getId());
@@ -101,7 +103,7 @@ public class RssReader {
      * @param findLastBlogContents : 해당 블로그 최신 글 TOP 1개
      */
     ContentsStatus createBlogContents(Blog blog, SyndEntry entry, BlogContents findLastBlogContents) {
-        ContentsStatus contentsStatus = ContentsStatus.DEFAULT;
+        ContentsStatus contentsStatus = ContentsStatus.OLD;
         if (findLastBlogContents == null) {
             BlogContents blogDetail = BlogContents.createPublish(RssResponseDto.newRss(entry, blog));
             blogContentsRepository.save(blogDetail);
