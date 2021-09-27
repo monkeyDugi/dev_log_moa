@@ -139,6 +139,10 @@ blogs:
       rssUrl: https://v2.velog.io/rss/hkja0111
       title: 임종성
     -
+      url: https://kim-jong-hyun.tistory.com/
+      rssUrl: https://kim-jong-hyun.tistory.com/rss
+      title: 김종현
+    -
       url: https://jaime-note.tistory.com/
       rssUrl: https://jaime-note.tistory.com/rss
       title: 이정민
