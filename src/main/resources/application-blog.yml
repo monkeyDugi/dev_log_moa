@@ -146,6 +146,18 @@ blogs:
       url: https://jaime-note.tistory.com/
       rssUrl: https://jaime-note.tistory.com/rss
       title: 이정민
+    -
+      url: https://jeong-pro.tistory.com/
+      rssUrl: https://jeong-pro.tistory.com/rss
+      title: 정프로
+    -
+      url: https://wbluke.tistory.com/
+      rssUrl: https://wbluke.tistory.com/rss
+      title: wbluke
+    -
+      url: https://dev-monkey-dugi.tistory.com/
+      rssUrl: https://dev-monkey-dugi.tistory.com/rss
+      title: monkeyDugi
 ###########      403목록(현재 medium)
 #    -
 #      url: https://sarojaba.medium.com/
