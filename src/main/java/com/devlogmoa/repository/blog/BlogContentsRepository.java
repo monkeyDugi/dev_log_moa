@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface BlogContentsRepository extends JpaRepository<BlogContents, Long>, BlogContentsRepositoryCustom {
 
-    BlogContents findTopByBlogIdOrderByPubDateDesc(Long blog_id);
+    BlogContents findTopByBlogIdOrderByPubDateDesc(Long id);
 
     @Override
     Page<BlogContentsResponseDto> findAllByOrderByPubDateDescIdDesc(Pageable pageable);

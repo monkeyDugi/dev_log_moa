@@ -61,7 +61,7 @@ public class OAuthAttributes {
                 .name(name)
                 .email(email)
                 .role(Role.USER)
-                .mailReceiptStatus(MailReceiptStatus.Y)
+                .mailReceiptStatus(MailReceiptStatus.USE)
                 .build();
     }
 }

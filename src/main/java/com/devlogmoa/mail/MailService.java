@@ -27,7 +27,7 @@ public class MailService {
     }
 
     private void sendEmail(SimpleMailMessage message, Member findMember) {
-        if (findMember.getMailReceiptStatus() == MailReceiptStatus.Y) {
+        if (findMember.getMailReceiptStatus() == MailReceiptStatus.USE) {
             message.setTo(findMember.getEmail());
             message.setSubject("devlogmoa");
             message.setText("devlogmoa에서 새로운 소식이 올라왔어요!! 확인하세요!! http://www.devlogmoa.shop");
