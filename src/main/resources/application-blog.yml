@@ -158,6 +158,10 @@ blogs:
       url: https://dev-monkey-dugi.tistory.com/
       rssUrl: https://dev-monkey-dugi.tistory.com/rss
       title: monkeyDugi
+    -
+      url: https://maivve.tistory.com/
+      rssUrl: https://maivve.tistory.com//rss
+      title: 메이쁘
 ###########      403목록(현재 medium)
 #    -
 #      url: https://sarojaba.medium.com/
