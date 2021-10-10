@@ -6,5 +6,4 @@ spring:
     activate:
       on-profile: real
 cron:
-#  expression: 0 0 6 ? * *
-  expression: 0 30 14 ? * *
+  expression: 0 0 6 ? * *

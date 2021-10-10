@@ -106,7 +106,6 @@ public class RssReader {
         ContentsStatus contentsStatus = ContentsStatus.OLD;
         if (findLastBlogContents == null) {
             BlogContents blogDetail = BlogContents.createPublish(RssResponseDto.newRss(entry, blog));
-            System.out.println("dugi : " + blog.getBlogLink());
             blogContentsRepository.save(blogDetail);
 
             contentsStatus = ContentsStatus.NEW;
