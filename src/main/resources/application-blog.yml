@@ -122,11 +122,6 @@ blogs:
       url: https://kim-jong-hyun.tistory.com/
       rssUrl: https://kim-jong-hyun.tistory.com/rss
       title: 김종현
-#      운영에서 title null
-#    -
-#      url: https://likejazz.com/
-#      rssUrl: https://likejazz.com/rss
-#      title: ParksNotes
     -
       url: https://jessyt.tistory.com/
       rssUrl: https://jessyt.tistory.com/rss
@@ -163,6 +158,12 @@ blogs:
       url: https://maivve.tistory.com/
       rssUrl: https://maivve.tistory.com/rss
       title: 메이쁘
+###########      title null
+#      운영에서 title null
+#    -
+#      url: https://likejazz.com/
+#      rssUrl: https://likejazz.com/rss
+#      title: ParksNotes
 ###########      403목록(현재 medium)
 #    -
 #      url: https://sarojaba.medium.com/
