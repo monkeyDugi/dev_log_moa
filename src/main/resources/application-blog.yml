@@ -158,6 +158,10 @@ blogs:
       url: https://maivve.tistory.com/
       rssUrl: https://maivve.tistory.com/rss
       title: 메이쁘
+    -
+      url: https://jordy-torvalds.tistory.com/
+      rssUrl: https://jordy-torvalds.tistory.com//rss
+      title: Jordy Torvalds Tech
 ###########      title null
 #      운영에서 title null
 #    -
