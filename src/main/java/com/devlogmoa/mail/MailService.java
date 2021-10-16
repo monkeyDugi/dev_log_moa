@@ -18,21 +18,17 @@ public class MailService {
     private final MemberRepository memberRepository;
 
     public void sendEmail() {
-        List<Member> findMembers = memberRepository.findAll();
+        List<Member> findMailReceiptUseMembers = memberRepository.findByMailReceiptStatus(MailReceiptStatus.USE);
         SimpleMailMessage message = new SimpleMailMessage();
 
-        for (Member findMember : findMembers) {
-            sendEmail(message, findMember);
-        }
+        findMailReceiptUseMembers.forEach(member -> sendMail(message, member.getEmail()));
     }
 
-    private void sendEmail(SimpleMailMessage message, Member findMember) {
-        if (findMember.getMailReceiptStatus() == MailReceiptStatus.USE) {
-            message.setTo(findMember.getEmail());
-            message.setSubject("devlogmoa");
-            message.setText("devlogmoa에서 새로운 소식이 올라왔어요!! 확인하세요!! http://www.devlogmoa.shop");
+    private void sendMail(SimpleMailMessage message, String mailRecipient) {
+        message.setTo(mailRecipient);
+        message.setSubject("devlogmoa");
+        message.setText("devlogmoa에서 새로운 소식이 올라왔어요!! 확인하세요!! http://www.devlogmoa.shop");
 
-            mailSender.send(message);
-        }
+        mailSender.send(message);
     }
 }
