@@ -41,7 +41,10 @@ public class RssReader {
         ContentsStatus contentsStatus = ContentsStatus.OLD;
 
         for (BlogPropertiesDto blogPropertiesDto : blogProperties.getList()) {
-            contentsStatus = createRssData(blogPropertiesDto.getUrl(), blogPropertiesDto.getRssUrl());
+            ContentsStatus rssDataContentsStatus = createRssData(blogPropertiesDto.getUrl(), blogPropertiesDto.getRssUrl());
+            if (contentsStatus == ContentsStatus.OLD) {
+                contentsStatus = rssDataContentsStatus;
+            }
         }
 
         if (contentsStatus == ContentsStatus.NEW) {

@@ -1,5 +1,7 @@
 package com.devlogmoa.scheduler;
 
+import com.devlogmoa.config.blog.BlogProperties;
+import com.devlogmoa.config.blog.BlogPropertiesDto;
 import com.devlogmoa.domain.blog.BlogContents;
 import com.devlogmoa.domain.blog.ContentsStatus;
 import com.devlogmoa.mail.MailService;
@@ -12,7 +14,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -25,7 +29,7 @@ class RssReaderTest {
 
     public static final String TITLE = "title";
     public static final String LINK_URL = "linkUrl";
-    public static final Date PUBLISHED_DATE = new Date();
+    public static final Date PUBLISHED_CURRENT_DATE = new Date();
 
     private RssReader rssReader;
 
@@ -40,7 +44,7 @@ class RssReaderTest {
 
         rssReader = new RssReader(blogRepository, blogContentsRepository, mailService);
 
-        when(syndEntry.getPublishedDate()).thenReturn(PUBLISHED_DATE);
+        when(syndEntry.getPublishedDate()).thenReturn(PUBLISHED_CURRENT_DATE);
         when(syndEntry.getTitle()).thenReturn(TITLE);
         when(syndEntry.getLink()).thenReturn(LINK_URL);
         when(blogContentsRepository.save(any())).thenReturn(null);
@@ -65,7 +69,7 @@ class RssReaderTest {
 
         rssReader = new RssReader(blogRepository, blogContentsRepository, mailService);
 
-        when(syndEntry.getPublishedDate()).thenReturn(PUBLISHED_DATE);
+        when(syndEntry.getPublishedDate()).thenReturn(PUBLISHED_CURRENT_DATE);
         when(findLastBlogContents.isNewPublish(any())).thenReturn(false);
 
         // when
@@ -89,7 +93,7 @@ class RssReaderTest {
 
         rssReader = new RssReader(blogRepository, blogContentsRepository, mailService);
 
-        when(syndEntry.getPublishedDate()).thenReturn(PUBLISHED_DATE);
+        when(syndEntry.getPublishedDate()).thenReturn(PUBLISHED_CURRENT_DATE);
         when(findLastBlogContents.isNewPublish(any())).thenReturn(true);
 
         // when
@@ -98,5 +102,11 @@ class RssReaderTest {
         // then
         verify(blogContentsRepository, times(1)).save(any());
         assertThat(contentsStatus).isEqualTo(ContentsStatus.NEW);
+    }
+
+    @DisplayName("신규 컨텐츠가 하나라도 있으면 메일을 발송한다.")
+    @Test
+    void sendMail() {
+
     }
 }
