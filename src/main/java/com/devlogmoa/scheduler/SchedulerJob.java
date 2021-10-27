@@ -20,6 +20,6 @@ public class SchedulerJob implements Job {
         RssReader rssReader = (RssReader) CustomBeanUtil.getBean("rssReader");
         BlogProperties blogProperties = (BlogProperties) CustomBeanUtil.getBean("blogProperties");
 
-        rssReader.createRssData(blogProperties);
+        RssDtos rssDtos = rssReader.ReadRss(blogProperties);
     }
 }
