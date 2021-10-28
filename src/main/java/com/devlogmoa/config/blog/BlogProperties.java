@@ -14,4 +14,8 @@ import java.util.List;
 public class BlogProperties {
 
     private List<BlogPropertiesDto> list = new ArrayList<>();
+
+    public void add(BlogPropertiesDto blogPropertiesDto) {
+        list.add(blogPropertiesDto);
+    }
 }

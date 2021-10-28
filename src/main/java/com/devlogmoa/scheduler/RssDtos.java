@@ -12,6 +12,10 @@ public class RssDtos {
         rssDtos.add(rssDto);
     }
 
+    public void addAll(List<RssDto> rssDtos) {
+        this.rssDtos.addAll(rssDtos);
+    }
+
     public List<RssDto> getRssDtos() {
         return Collections.unmodifiableList(rssDtos);
     }
