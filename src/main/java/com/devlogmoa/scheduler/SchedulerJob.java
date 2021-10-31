@@ -19,9 +19,10 @@ public class SchedulerJob implements Job {
     public void execute(JobExecutionContext context) throws JobExecutionException {
         RssReader rssReader = (RssReader) CustomBeanUtil.getBean("rssReader");
         RssStorage rssStorage = (RssStorage) CustomBeanUtil.getBean("rssStorage");
+        SyndFeedable syndFeedable = (SyndFeedable) CustomBeanUtil.getBean("syndFeedImpl");
         BlogProperties blogProperties = (BlogProperties) CustomBeanUtil.getBean("blogProperties");
 
-        RssDtos rssDtos = rssReader.ReadRss(blogProperties, new SyndFeedImpl());
-        rssStorage.save(rssDtos);
+        SyndFeedDtos syndFeedDtos = rssReader.ReadRss(blogProperties, syndFeedable);
+        rssStorage.save(syndFeedDtos);
     }
 }

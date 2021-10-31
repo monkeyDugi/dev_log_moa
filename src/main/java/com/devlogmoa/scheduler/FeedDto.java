@@ -5,7 +5,7 @@ import lombok.Getter;
 import java.time.LocalDate;
 
 @Getter
-public class RssDto {
+public class FeedDto {
 
     private final String url;
     private final String rssUrl;
@@ -14,7 +14,7 @@ public class RssDto {
     private final String pubTitle;
     private final LocalDate pubDate;
 
-    public RssDto(String url, String rssUrl, String title, String pubLink, String pubTitle, LocalDate pubDate) {
+    public FeedDto(String url, String rssUrl, String title, String pubLink, String pubTitle, LocalDate pubDate) {
         this.url = url;
         this.rssUrl = rssUrl;
         this.title = title;
@@ -25,7 +25,7 @@ public class RssDto {
 
     @Override
     public String toString() {
-        return "RssDto{" +
+        return "FeedDto{" +
                 "url='" + url + '\'' +
                 ", rssUrl='" + rssUrl + '\'' +
                 ", title='" + title + '\'' +

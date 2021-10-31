@@ -1,14 +1,11 @@
 package com.devlogmoa.web.dto.response.rss;
 
 import com.devlogmoa.domain.blog.Blog;
-import com.devlogmoa.util.CustomDateUtils;
-import com.sun.syndication.feed.synd.SyndEntry;
+import com.devlogmoa.scheduler.FeedDto;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 
 @Getter @Setter
 public class RssResponseDto {
@@ -22,14 +19,13 @@ public class RssResponseDto {
 
     }
 
-    public static RssResponseDto newRss(SyndEntry entry, Blog blog) {
+    public static RssResponseDto newRss(FeedDto feedDto, Blog blog) {
         RssResponseDto rssResponseDto = new RssResponseDto();
 
         rssResponseDto.blog = blog;
-        // LocalDate로 변환
-        rssResponseDto.pubDate = CustomDateUtils.parseLocalDate(entry.getPublishedDate());
-        rssResponseDto.title = entry.getTitle();
-        rssResponseDto.pubLink = entry.getLink();
+        rssResponseDto.pubDate = feedDto.getPubDate();
+        rssResponseDto.title = feedDto.getTitle();
+        rssResponseDto.pubLink = feedDto.getPubLink();
 
         return rssResponseDto;
     }

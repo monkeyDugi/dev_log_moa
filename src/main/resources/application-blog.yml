@@ -59,10 +59,6 @@ blogs:
       rssUrl: https://www.44bits.io/ko/feed/posts
       title: 44BITS
     -
-      url: https://www.ridicorp.com/story-category/tech-blog
-      rssUrl: https://www.ridicorp.com/story-category/tech-blog/feed
-      title: 리디북스
-    -
       url: https://hyperconnect.github.io
       rssUrl: https://hyperconnect.github.io/feed.xml
       title: 하이퍼커넥트
@@ -82,10 +78,6 @@ blogs:
       url: https://danawalab.github.io/
       rssUrl: https://danawalab.github.io/feed
       title: 다나와
-    -
-      url: https://pushnewsdev.github.io
-      rssUrl: https://pushnewsdev.github.io/feed
-      title: 푸시뉴스
     -
       url: https://tech.oliveyoung.co.kr
       rssUrl: https://tech.oliveyoung.co.kr/feed
